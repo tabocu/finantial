@@ -82,7 +82,9 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.container, new IndiceFragment())
                     .commit();
         } else if (id == R.id.nav_tesouro) {
-
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new TesouroFragment())
+                    .commit();
         } else if (id == R.id.nav_sobre) {
 
         }
