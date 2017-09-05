@@ -74,9 +74,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_moeda) {
-            // Handle the camera action
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new MoedaFragment())
+                    .commit();
         } else if (id == R.id.nav_indice) {
-
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new IndiceFragment())
+                    .commit();
         } else if (id == R.id.nav_tesouro) {
 
         } else if (id == R.id.nav_sobre) {

@@ -6,4 +6,5 @@
 
     <string name="action_settings">Settings</string>
     <string name="moeda_content">Moeda content!</string>
+    <string name="indice_content">Indice content!</string>
 </resources>
