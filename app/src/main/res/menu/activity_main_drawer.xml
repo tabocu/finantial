@@ -5,19 +5,19 @@
         <item
             android:id="@+id/nav_moeda"
             android:icon="@drawable/ic_menu_moeda"
-            android:title="Moedas" />
+            android:title="@string/titulo_moeda" />
         <item
             android:id="@+id/nav_indice"
             android:icon="@drawable/ic_menu_indice"
-            android:title="Indices" />
+            android:title="@string/titulo_indice" />
         <item
             android:id="@+id/nav_tesouro"
             android:icon="@drawable/ic_menu_tesouro"
-            android:title="Tesouro" />
+            android:title="@string/titulo_tesouro" />
         <item
             android:id="@+id/nav_sobre"
             android:icon="@drawable/ic_menu_sobre"
-            android:title="Sobre" />
+            android:title="@string/titulo_sobre" />
     </group>
 
 </menu>
