@@ -1,4 +1,4 @@
-package sistemas.puc.com.finantialapp;
+package sistemas.puc.com.finantialapp.entities;
 
 public class TesouroItem {
     // TODO: Criar getters e setters pertinentes

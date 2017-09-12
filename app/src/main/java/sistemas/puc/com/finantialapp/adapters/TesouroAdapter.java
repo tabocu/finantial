@@ -1,7 +1,6 @@
 package sistemas.puc.com.finantialapp.adapters;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import sistemas.puc.com.finantialapp.R;
-import sistemas.puc.com.finantialapp.TesouroItem;
+import sistemas.puc.com.finantialapp.entities.TesouroItem;
 
 public class TesouroAdapter extends ArrayAdapter<TesouroItem> {
 

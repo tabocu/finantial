@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import sistemas.puc.com.finantialapp.adapters.TesouroAdapter;
+import sistemas.puc.com.finantialapp.entities.TesouroItem;
 
 public class TesouroFragment extends Fragment {
 
