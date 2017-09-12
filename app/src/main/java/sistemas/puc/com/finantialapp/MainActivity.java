@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new MoedaFragment())
                     .commit();
+            setTitle(R.string.titulo_moeda);
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -67,7 +68,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -77,18 +77,22 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, new MoedaFragment())
                     .commit();
+            setTitle(R.string.titulo_moeda);
         } else if (id == R.id.nav_indice) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, new IndiceFragment())
                     .commit();
+            setTitle(R.string.titulo_indice);
         } else if (id == R.id.nav_tesouro) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, new TesouroFragment())
                     .commit();
+            setTitle(R.string.titulo_tesouro);
         } else if (id == R.id.nav_sobre) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, new SobreFragment())
                     .commit();
+            setTitle(R.string.titulo_sobre);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

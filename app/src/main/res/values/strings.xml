@@ -9,4 +9,11 @@
     <string name="indice_content">Indice content!</string>
     <string name="tesouro_content">Tesouro content!</string>
     <string name="sobre_content">Sobre content!</string>
+
+    <!-- Titles -->
+    <string name="titulo_moeda">Moedas</string>
+    <string name="titulo_indice">Índices</string>
+    <string name="titulo_tesouro">Tesouro</string>
+    <string name="titulo_sobre">Sobre</string>
+
 </resources>
