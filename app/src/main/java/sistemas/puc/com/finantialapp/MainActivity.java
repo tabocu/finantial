@@ -13,13 +13,18 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    MoedaFragment m_moedaFragment = new MoedaFragment();
+    IndiceFragment m_indiceFragment = new IndiceFragment();
+    TesouroFragment m_tesouroFragment = new TesouroFragment();
+    SobreFragment m_sobreFragment = new SobreFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new MoedaFragment())
+                    .add(R.id.container, m_moedaFragment)
                     .commit();
             setTitle(R.string.titulo_moeda);
         }
@@ -75,22 +80,22 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_moeda) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new MoedaFragment())
+                    .replace(R.id.container, m_moedaFragment)
                     .commit();
             setTitle(R.string.titulo_moeda);
         } else if (id == R.id.nav_indice) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new IndiceFragment())
+                    .replace(R.id.container, m_indiceFragment)
                     .commit();
             setTitle(R.string.titulo_indice);
         } else if (id == R.id.nav_tesouro) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new TesouroFragment())
+                    .replace(R.id.container, m_tesouroFragment)
                     .commit();
             setTitle(R.string.titulo_tesouro);
         } else if (id == R.id.nav_sobre) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new SobreFragment())
+                    .replace(R.id.container, m_sobreFragment)
                     .commit();
             setTitle(R.string.titulo_sobre);
         }
