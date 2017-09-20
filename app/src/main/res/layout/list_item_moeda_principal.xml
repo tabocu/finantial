@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hapticFeedbackEnabled="false"
+    android:stretchColumns="0"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <TableRow android:layout_width="match_parent">
+
+        <TextView
+            android:id="@+id/list_item_nome_moeda_textview"
+            android:layout_span="2"
+            android:text="Dolar"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+    </TableRow>
+    <TableRow android:layout_width="match_parent">
+
+        <TextView
+            android:id="@+id/list_item_cotacao_moeda_textview"
+            android:text="R$3,52"
+            android:textAlignment="center"
+            android:textSize="40sp" />
+    </TableRow>
+    <TableRow android:layout_width="match_parent">
+
+        <TextView
+            android:id="@+id/list_item_data_moeda_textview"
+            android:text="12/09/2017"
+            android:textAlignment="center" />
+    </TableRow>
+</TableLayout>
