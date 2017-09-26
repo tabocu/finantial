@@ -1,5 +1,6 @@
 package sistemas.puc.com.finantialapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -67,7 +68,9 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this, ConversaoActivity.class);
+            //intent.putExtra(EXTRA_MESSAGE, message);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
