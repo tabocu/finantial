@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +16,7 @@ import java.util.List;
 import sistemas.puc.com.finantialapp.adapters.MoedaAdapter;
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
 
-public class MoedaFragment extends Fragment {
+public class MoedaFragment extends Fragment implements AdapterView.OnItemLongClickListener {
 
     MoedaAdapter m_moedaAdapter;
 
@@ -35,7 +37,14 @@ public class MoedaFragment extends Fragment {
 
         ListView listView = (ListView) rootView.findViewById(R.id.listview_moeda);
         listView.setAdapter(m_moedaAdapter);
+        listView.setOnItemLongClickListener(this);
 
         return rootView;
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Toast.makeText(getContext(), "Eureka: "+ i, Toast.LENGTH_SHORT).show();
+        return false;
     }
 }
