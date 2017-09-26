@@ -52,8 +52,12 @@ public class MoedaFragment extends Fragment {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
         if (v.getId() == R.id.listview_moeda) {
             MenuInflater inflater = getActivity().getMenuInflater();
-            inflater.inflate(R.menu.moeda_context_menu, menu);
             AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+            if (info.position == 0) {
+                inflater.inflate(R.menu.moeda_principal_context_menu, menu);
+            } else {
+                inflater.inflate(R.menu.moeda_context_menu, menu);
+            }
             menu.setHeaderTitle(m_moedaAdapter.getItem(info.position).m_nome);
         }
     }
@@ -66,6 +70,8 @@ public class MoedaFragment extends Fragment {
                 Intent intent = new Intent(getContext(), ConversaoActivity.class);
                 //intent.putExtra("position", info.position);
                 startActivity(intent);
+                return true;
+            case R.id.principal:
                 return true;
             default:
                 return super.onContextItemSelected(item);
