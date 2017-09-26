@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -52,6 +53,8 @@ public class MoedaFragment extends Fragment {
         if (v.getId() == R.id.listview_moeda) {
             MenuInflater inflater = getActivity().getMenuInflater();
             inflater.inflate(R.menu.moeda_context_menu, menu);
+            AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+            menu.setHeaderTitle(m_moedaAdapter.getItem(info.position).m_nome);
         }
     }
 
@@ -61,7 +64,7 @@ public class MoedaFragment extends Fragment {
         switch(item.getItemId()) {
             case R.id.conversao:
                 Intent intent = new Intent(getContext(), ConversaoActivity.class);
-                //intent.putExtra(EXTRA_MESSAGE, message);
+                //intent.putExtra("position", info.position);
                 startActivity(intent);
                 return true;
             default:
