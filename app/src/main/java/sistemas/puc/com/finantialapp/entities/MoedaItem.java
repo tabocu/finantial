@@ -10,4 +10,9 @@ public class MoedaItem {
         m_cotacao = cotacao;
         m_data = data;
     }
+
+    @Override
+    public String toString() {
+        return m_nome;
+    }
 }

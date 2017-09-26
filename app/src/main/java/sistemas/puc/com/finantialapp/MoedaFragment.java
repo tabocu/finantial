@@ -21,6 +21,7 @@ import java.util.List;
 
 import sistemas.puc.com.finantialapp.adapters.MoedaAdapter;
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
+import sistemas.puc.com.finantialapp.model.Database;
 
 public class MoedaFragment extends Fragment {
 
@@ -29,13 +30,8 @@ public class MoedaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        MoedaItem[] data = {
-            new MoedaItem("Dolar", "R$3,1133", "06/09/2017"),
-            new MoedaItem("Libra", "R$4,0628", "06/09/2017"),
-            new MoedaItem("Euro", "R$3,7145", "06/09/2017")
-        };
 
-        List<MoedaItem> moedaList = new ArrayList<>(Arrays.asList(data));
+        List<MoedaItem> moedaList = Database.getMoedaList();
 
         m_moedaAdapter = new MoedaAdapter(getActivity(), moedaList);
 
