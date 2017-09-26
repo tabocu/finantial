@@ -68,9 +68,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, ConversaoActivity.class);
-            //intent.putExtra(EXTRA_MESSAGE, message);
-            startActivity(intent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
