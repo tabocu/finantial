@@ -5,18 +5,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import sistemas.puc.com.finantialapp.adapters.MoedaAdapter;
@@ -25,7 +21,9 @@ import sistemas.puc.com.finantialapp.model.Database;
 
 public class MoedaFragment extends Fragment {
 
+    public final static String MOEDA_SELECIONADA = "moedaSelecionada";
     MoedaAdapter m_moedaAdapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +62,7 @@ public class MoedaFragment extends Fragment {
         switch(item.getItemId()) {
             case R.id.conversao:
                 Intent intent = new Intent(getContext(), ConversaoActivity.class);
-                //intent.putExtra("position", info.position);
+                intent.putExtra(MOEDA_SELECIONADA, info.position);
                 startActivity(intent);
                 return true;
             case R.id.principal:

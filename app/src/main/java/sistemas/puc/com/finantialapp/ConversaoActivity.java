@@ -41,5 +41,11 @@ public class ConversaoActivity extends AppCompatActivity {
 
         m_moedaEsqSpinner.setAdapter(moedaEsqSpinnerAdapter);
         m_moedaDirSpinner.setAdapter(moedaDirSpinnerAdapter);
+
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            int moedaSelecionada = b.getInt(MoedaFragment.MOEDA_SELECIONADA);
+            m_moedaDirSpinner.setSelection(moedaSelecionada);
+        }
     }
 }
