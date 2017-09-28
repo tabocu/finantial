@@ -1,7 +1,7 @@
 package sistemas.puc.com.finantialapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -53,6 +53,13 @@ public class ConversaoActivity extends AppCompatActivity {
             // TODO Buscar a posição da moeda no array corretamente.
             int moeda_esq_position = 0;
             int moeda_dir_position = 0;
+            for (int i=0;i<m_moedaEsqSpinner.getAdapter().getCount();i++) {
+                if (((MoedaItem)m_moedaEsqSpinner.getItemAtPosition(i)).m_nome.equals(moeda_esq)) {
+                    moeda_esq_position = i;
+                }
+                else if (((MoedaItem)m_moedaEsqSpinner.getItemAtPosition(i)).m_nome.equals(moeda_dir))
+                    moeda_dir_position = i;
+            }
 
             m_moedaEsqSpinner.setSelection(moeda_esq_position);
             m_moedaDirSpinner.setSelection(moeda_dir_position);
