@@ -13,6 +13,9 @@ import sistemas.puc.com.finantialapp.model.Database;
 
 public class ConversaoActivity extends AppCompatActivity {
 
+    public final static String EXTRA_MOEDA_ESQ = "extraMoedaEsq";
+    public final static String EXTRA_MOEDA_DIR = "extraMoedaDir";
+
     EditText m_moedaEsqEditText;
     EditText m_moedaDirEditText;
     Spinner m_moedaEsqSpinner;
@@ -44,8 +47,15 @@ public class ConversaoActivity extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         if (b != null) {
-            int moedaSelecionada = b.getInt(MoedaFragment.MOEDA_SELECIONADA);
-            m_moedaDirSpinner.setSelection(moedaSelecionada);
+            String moeda_esq = b.getString(EXTRA_MOEDA_ESQ);
+            String moeda_dir = b.getString(EXTRA_MOEDA_DIR);
+
+            // TODO Buscar a posição da moeda no array corretamente.
+            int moeda_esq_position = 0;
+            int moeda_dir_position = 0;
+
+            m_moedaEsqSpinner.setSelection(moeda_esq_position);
+            m_moedaDirSpinner.setSelection(moeda_dir_position);
         }
     }
 }

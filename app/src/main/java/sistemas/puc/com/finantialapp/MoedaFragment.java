@@ -21,9 +21,8 @@ import sistemas.puc.com.finantialapp.model.Database;
 
 public class MoedaFragment extends Fragment {
 
-    public final static String MOEDA_SELECIONADA = "moedaSelecionada";
+    private static final String DOLAR = "Dolar";
     MoedaAdapter m_moedaAdapter;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +61,8 @@ public class MoedaFragment extends Fragment {
         switch(item.getItemId()) {
             case R.id.conversao:
                 Intent intent = new Intent(getContext(), ConversaoActivity.class);
-                intent.putExtra(MOEDA_SELECIONADA, info.position);
+                intent.putExtra(ConversaoActivity.EXTRA_MOEDA_ESQ, DOLAR);
+                intent.putExtra(ConversaoActivity.EXTRA_MOEDA_DIR, m_moedaAdapter.getItem(info.position).m_nome);
                 startActivity(intent);
                 return true;
             case R.id.principal:
