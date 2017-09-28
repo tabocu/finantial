@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="0,2"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context="sistemas.puc.com.finantialapp.ConversaoActivity">
+    <TableRow>
+
+        <EditText
+            android:id="@+id/moeda_esq_edittext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="1,00"
+            android:textAlignment="center"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X" />
+
+        <EditText
+            android:id="@+id/moeda_dir_edittext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="3,10"
+            android:textAlignment="center"
+            android:inputType="numberDecimal" />
+    </TableRow>
+    <TableRow>
+
+        <Spinner
+            android:id="@+id/moeda_esq_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:id="@+id/moeda_dir_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </TableRow>
+</TableLayout>
+
