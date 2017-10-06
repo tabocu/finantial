@@ -1,5 +1,8 @@
 package sistemas.puc.com.finantialapp.model;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,5 +63,9 @@ public final class Database {
 
     public static List<IndiceItem> getIndiceList() {
         return new ArrayList<>(Arrays.asList(s_indiceData));
+    }
+
+    public static void update(Context c) {
+        Toast.makeText(c, "Database updated.", Toast.LENGTH_SHORT).show();
     }
 }
