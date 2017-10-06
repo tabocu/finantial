@@ -5,6 +5,7 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -52,7 +53,6 @@ public class FinantialProvider extends ContentProvider {
         }
     }
 
-    @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         Cursor retCursor;
@@ -100,15 +100,72 @@ public class FinantialProvider extends ContentProvider {
         return retCursor;
     }
 
-    @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return null;
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+        Uri returnUri;
+
+        switch (match) {
+            case MOEDA: {
+                long _id = db.insert(FinantialContract.MoedaEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = FinantialContract.MoedaEntry.buildMoedaUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            case TESOURO: {
+                long _id = db.insert(FinantialContract.TesouroEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = FinantialContract.TesouroEntry.buildTesouroUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            case INDICE: {
+                long _id = db.insert(FinantialContract.IndiceEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = FinantialContract.IndiceEntry.buildIndiceUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return returnUri;
     }
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+        int rowsDeleted;
+        // this makes delete all rows return the number of rows deleted
+        if ( null == selection ) selection = "1";
+        switch (match) {
+            case MOEDA:
+                rowsDeleted = db.delete(
+                        FinantialContract.MoedaEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            case TESOURO:
+                rowsDeleted = db.delete(
+                        FinantialContract.TesouroEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            case INDICE:
+                rowsDeleted = db.delete(
+                        FinantialContract.IndiceEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        // Because a null deletes all rows
+        if (rowsDeleted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return rowsDeleted;
     }
 
     @Override
