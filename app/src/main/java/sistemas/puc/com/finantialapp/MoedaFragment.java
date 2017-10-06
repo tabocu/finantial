@@ -40,35 +40,4 @@ public class MoedaFragment extends Fragment {
 
         return rootView;
     }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-        if (v.getId() == R.id.listview_moeda) {
-            MenuInflater inflater = getActivity().getMenuInflater();
-            AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
-            if (info.position == 0) {
-                inflater.inflate(R.menu.moeda_principal_context_menu, menu);
-            } else {
-                inflater.inflate(R.menu.moeda_context_menu, menu);
-            }
-            menu.setHeaderTitle(m_moedaAdapter.getItem(info.position).m_nome);
-        }
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-        switch(item.getItemId()) {
-            case R.id.conversao:
-                Intent intent = new Intent(getContext(), ConversaoActivity.class);
-                intent.putExtra(ConversaoActivity.EXTRA_MOEDA_ESQ, DOLAR);
-                intent.putExtra(ConversaoActivity.EXTRA_MOEDA_DIR, m_moedaAdapter.getItem(info.position).m_nome);
-                startActivity(intent);
-                return true;
-            case R.id.principal:
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
-    }
 }
