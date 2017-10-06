@@ -35,10 +35,9 @@ public class FinantialProvider extends ContentProvider {
         mOpenHelper = new FinantialDbHelper(getContext());
         return true;
     }
-    
+
     @Override
     public String getType(@NonNull Uri uri) {
-
         // Use the Uri Matcher to determine what kind of URI this is.
         final int match = sUriMatcher.match(uri);
         switch (match) {
@@ -56,7 +55,49 @@ public class FinantialProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        return null;
+        Cursor retCursor;
+        switch (sUriMatcher.match(uri)) {
+            case MOEDA: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        FinantialContract.MoedaEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+            case TESOURO: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        FinantialContract.TesouroEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+            case INDICE: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        FinantialContract.IndiceEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return retCursor;
     }
 
     @Nullable
