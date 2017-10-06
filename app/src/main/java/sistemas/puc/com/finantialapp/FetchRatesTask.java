@@ -2,7 +2,7 @@ package sistemas.puc.com.finantialapp;
 
 import android.os.AsyncTask;
 
-public class ExchangeRatesTask extends AsyncTask<Void, Void, Void>{
+public class FetchRatesTask extends AsyncTask<Void, Void, Void>{
 
     @Override
     protected void onPreExecute(){
