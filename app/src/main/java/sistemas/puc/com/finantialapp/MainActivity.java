@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu nav_Menu = navigationView.getMenu();
+        nav_Menu.findItem(R.id.nav_indice).setVisible(false);
+        nav_Menu.findItem(R.id.nav_tesouro).setVisible(false);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
