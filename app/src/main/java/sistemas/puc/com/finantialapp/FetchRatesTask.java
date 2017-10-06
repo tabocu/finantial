@@ -9,8 +9,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
-public class FetchRatesTask extends AsyncTask<Void, Void, Void>{
+import sistemas.puc.com.finantialapp.entities.MoedaItem;
+
+public class FetchRatesTask extends AsyncTask<Void, Void, List<MoedaItem>>{
 
     private static final String FIXER_URL = "http://api.fixer.io/latest?base=BRL";
     private final String LOG_TAG = FetchRatesTask.class.getSimpleName();
@@ -21,7 +24,7 @@ public class FetchRatesTask extends AsyncTask<Void, Void, Void>{
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected List<MoedaItem> doInBackground(Void... voids) {
         // These two need to be declared outside the try/catch
         // so that they can be closed in the finally block.
         HttpURLConnection urlConnection = null;
@@ -45,7 +48,6 @@ public class FetchRatesTask extends AsyncTask<Void, Void, Void>{
             InputStream inputStream = urlConnection.getInputStream();
             StringBuffer buffer = new StringBuffer();
             if (inputStream == null) {
-                // Nothing to do.
                 return null;
             }
             reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -63,7 +65,6 @@ public class FetchRatesTask extends AsyncTask<Void, Void, Void>{
                 return null;
             }
             ratesJsonStr = buffer.toString();
-            Log.d(LOG_TAG, ratesJsonStr);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
             // If the code didn't successfully get the weather data, there's no point in attemping
@@ -81,6 +82,9 @@ public class FetchRatesTask extends AsyncTask<Void, Void, Void>{
                 }
             }
         }
+
+        // Call parser here to parse ratesJsonStr
+
         return null;
     }
 
@@ -90,7 +94,7 @@ public class FetchRatesTask extends AsyncTask<Void, Void, Void>{
     }
 
     @Override
-    protected void onPostExecute(Void result) {
+    protected void onPostExecute(List<MoedaItem> result) {
 
     }
 }
