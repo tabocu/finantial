@@ -30,16 +30,13 @@ public class FetchRatesTask extends AsyncTask<Void, Void, List<MoedaItem>>{
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
-        // Will contain the raw JSON response as a string.
         String ratesJsonStr = null;
 
         try {
-            // Construct the URL for the OpenWeatherMap query
-            // Possible parameters are avaiable at OWM's forecast API page, at
-            // http://openweathermap.org/API#forecast
+            // Construct the URL for the Fixer.io query
             URL url = new URL(FIXER_URL);
 
-            // Create the request to OpenWeatherMap, and open the connection
+            // Create the request and open the connection
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
@@ -54,21 +51,17 @@ public class FetchRatesTask extends AsyncTask<Void, Void, List<MoedaItem>>{
 
             String line;
             while ((line = reader.readLine()) != null) {
-                // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
-                // But it does make debugging a *lot* easier if you print out the completed
-                // buffer for debugging.
+                // \n is not necessary but it makes debugging easier.
                 buffer.append(line + "\n");
             }
 
-            if (buffer.length() == 0) {
-                // Stream was empty.  No point in parsing.
+            if (buffer.length() != 0) {
+                ratesJsonStr = buffer.toString();
+            } else {
                 return null;
             }
-            ratesJsonStr = buffer.toString();
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
-            // If the code didn't successfully get the weather data, there's no point in attemping
-            // to parse it.
             return null;
         } finally {
             if (urlConnection != null) {
@@ -84,6 +77,7 @@ public class FetchRatesTask extends AsyncTask<Void, Void, List<MoedaItem>>{
         }
 
         // Call parser here to parse ratesJsonStr
+        // then return the object created by it.
 
         return null;
     }
