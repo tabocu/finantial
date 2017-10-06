@@ -35,16 +35,27 @@ public class FinantialProvider extends ContentProvider {
         mOpenHelper = new FinantialDbHelper(getContext());
         return true;
     }
-
-    @Nullable
+    
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        return null;
+    public String getType(@NonNull Uri uri) {
+
+        // Use the Uri Matcher to determine what kind of URI this is.
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case MOEDA:
+                return FinantialContract.MoedaEntry.CONTENT_TYPE;
+            case TESOURO:
+                return FinantialContract.TesouroEntry.CONTENT_TYPE;
+            case INDICE:
+                return FinantialContract.IndiceEntry.CONTENT_TYPE;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
     }
 
     @Nullable
     @Override
-    public String getType(@NonNull Uri uri) {
+    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         return null;
     }
 
