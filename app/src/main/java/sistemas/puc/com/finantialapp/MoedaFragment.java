@@ -1,19 +1,12 @@
 package sistemas.puc.com.finantialapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ListView;
 
 import java.util.List;
 
@@ -41,6 +34,10 @@ public class MoedaFragment extends Fragment {
 
         // get data set
         List<MoedaItem> moedaList = Database.getMoedaList();
+
+        m_adapter = new MoedaAdapter(moedaList);
+
+        m_recyclerView.setAdapter(m_adapter);
 
         return rootView;
     }
