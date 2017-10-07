@@ -1,17 +1,12 @@
 package sistemas.puc.com.finantialapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ListView;
 
 import java.util.List;
 
@@ -21,54 +16,29 @@ import sistemas.puc.com.finantialapp.model.Database;
 
 public class MoedaFragment extends Fragment {
 
-    private static final String DOLAR = "Dolar";
-    MoedaAdapter m_moedaAdapter;
+    private RecyclerView m_recyclerView;
+    private RecyclerView.Adapter m_adapter;
+    private RecyclerView.LayoutManager m_layoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        List<MoedaItem> moedaList = Database.getMoedaList();
-
-        m_moedaAdapter = new MoedaAdapter(getActivity(), moedaList);
-
         View rootView = inflater.inflate(R.layout.fragment_moeda, container, false);
 
-        ListView listView = (ListView) rootView.findViewById(R.id.listview_moeda);
-        listView.setAdapter(m_moedaAdapter);
-        registerForContextMenu(listView);
+        m_recyclerView = (RecyclerView) rootView.findViewById(R.id.listview_moeda);
+        m_recyclerView.setHasFixedSize(true);
+
+        m_layoutManager = new LinearLayoutManager(getContext());
+        m_recyclerView.setLayoutManager(m_layoutManager);
+
+        // get data set
+        List<MoedaItem> moedaList = Database.getMoedaList();
+
+        m_adapter = new MoedaAdapter(moedaList);
+
+        m_recyclerView.setAdapter(m_adapter);
 
         return rootView;
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-        if (v.getId() == R.id.listview_moeda) {
-            MenuInflater inflater = getActivity().getMenuInflater();
-            AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
-            if (info.position == 0) {
-                inflater.inflate(R.menu.moeda_principal_context_menu, menu);
-            } else {
-                inflater.inflate(R.menu.moeda_context_menu, menu);
-            }
-            menu.setHeaderTitle(m_moedaAdapter.getItem(info.position).m_nome);
-        }
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-        switch(item.getItemId()) {
-            case R.id.conversao:
-                Intent intent = new Intent(getContext(), ConversaoActivity.class);
-                intent.putExtra(ConversaoActivity.EXTRA_MOEDA_ESQ, DOLAR);
-                intent.putExtra(ConversaoActivity.EXTRA_MOEDA_DIR, m_moedaAdapter.getItem(info.position).m_nome);
-                startActivity(intent);
-                return true;
-            case R.id.principal:
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
     }
 }
