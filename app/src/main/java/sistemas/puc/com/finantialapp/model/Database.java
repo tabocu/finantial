@@ -11,13 +11,14 @@ import sistemas.puc.com.finantialapp.FetchRatesTask;
 import sistemas.puc.com.finantialapp.entities.IndiceItem;
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
 import sistemas.puc.com.finantialapp.entities.TesouroItem;
+import sistemas.puc.com.finantialapp.util.Util;
 
 public final class Database {
 
     private static final MoedaItem[] s_moedaData = {
-            new MoedaItem("Dolar", "R$3,1133", "06/09/2017"),
-            new MoedaItem("Libra", "R$4,0628", "06/09/2017"),
-            new MoedaItem("Euro", "R$3,7145", "06/09/2017")
+            new MoedaItem("USD", "Dolar", 3.1133, Util.getTimeFromDate(7,10,2017)),
+            new MoedaItem("GBP", "Libra", 4.0628, Util.getTimeFromDate(7,10,2017)),
+            new MoedaItem("EUR", "Euro", 3.7145, Util.getTimeFromDate(7,10,2017))
     };
 
     private static final TesouroItem[] s_tesouroData = {

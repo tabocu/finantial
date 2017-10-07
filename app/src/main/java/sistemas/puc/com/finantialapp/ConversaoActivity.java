@@ -54,10 +54,10 @@ public class ConversaoActivity extends AppCompatActivity {
             int moeda_esq_position = 0;
             int moeda_dir_position = 0;
             for (int i = 0; i < m_moedaEsqSpinner.getAdapter().getCount(); i++) {
-                if (((MoedaItem)m_moedaEsqSpinner.getItemAtPosition(i)).m_nome.equals(moeda_esq)) {
+                if (((MoedaItem)m_moedaEsqSpinner.getItemAtPosition(i)).getNome().equals(moeda_esq)) {
                     moeda_esq_position = i;
                 }
-                else if (((MoedaItem)m_moedaEsqSpinner.getItemAtPosition(i)).m_nome.equals(moeda_dir)) {
+                else if (((MoedaItem)m_moedaEsqSpinner.getItemAtPosition(i)).getNome().equals(moeda_dir)) {
                     moeda_dir_position = i;
                 }
             }

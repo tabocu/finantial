@@ -11,6 +11,7 @@ import java.util.List;
 
 import sistemas.puc.com.finantialapp.R;
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
+import sistemas.puc.com.finantialapp.util.Util;
 
 public class MoedaAdapter extends AbstractListAdapter<MoedaItem,MoedaAdapter.ViewHolder> {
 
@@ -42,8 +43,12 @@ public class MoedaAdapter extends AbstractListAdapter<MoedaItem,MoedaAdapter.Vie
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.nomeMoeda.setText(getItem(position).m_nome);
-        holder.cotacaoMoeda.setText(getItem(position).m_cotacao);
-        holder.dataMoeda.setText(getItem(position).m_data);
+        holder.nomeMoeda.setText(getItem(position).getNome());
+
+        double cotacao = getItem(position).getCotacao();
+        holder.cotacaoMoeda.setText(Util.getRealStringFromDouble(cotacao));
+
+        long time = getItem(position).getTime();
+        holder.dataMoeda.setText(Util.getDateStringFromLong(time));
     }
 }
