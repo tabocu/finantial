@@ -72,7 +72,7 @@ public class FetchRatesTask extends AsyncTask<Void, Void, List<MoedaItem>>{
             }
         }
 
-        // TODO Call parser here to parse ratesJsonStr
+        // TODO: Call parser here to parse ratesJsonStr
         // then return the object created by it.
 
         return null;
