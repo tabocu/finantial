@@ -36,11 +36,10 @@ public class FinantialContract {
 
         public static final String TABLE_NAME = "moeda";
 
-        // TODO: Add moeda columns definitions
-        public static final String COLUMN_MOEDA_INITIALS  = "moeda_initials";
-        public static final String COLUMN_MOEDA_NAME      = "moeda_name";
-        public static final String COLUMN_MOEDA_DATE      = "moeda_date";
-        public static final String COLUMN_MOEDA_RATE      = "moeda_rate";
+        public static final String COLUMN_MOEDA_CODE = "moeda_initials";
+        public static final String COLUMN_MOEDA_NAME = "moeda_name";
+        public static final String COLUMN_MOEDA_DATE = "moeda_date";
+        public static final String COLUMN_MOEDA_RATE = "moeda_rate";
 
         public static Uri buildMoedaUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

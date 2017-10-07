@@ -19,11 +19,11 @@ public class FinantialDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_MOEDA_TABLE = "CREATE TABLE " + MoedaEntry.TABLE_NAME + " (" +
-                MoedaEntry._ID                   + " INTEGER PRIMARY KEY," +
-                MoedaEntry.COLUMN_MOEDA_INITIALS + " TEXT UNIQUE NOT NULL, " +
-                MoedaEntry.COLUMN_MOEDA_NAME     + " TEXT UNIQUE NOT NULL, " +
-                MoedaEntry.COLUMN_MOEDA_DATE     + " INTEGER NOT NULL, " +
-                MoedaEntry.COLUMN_MOEDA_RATE     + " REAL NOT NULL, " +
+                MoedaEntry._ID               + " INTEGER PRIMARY KEY," +
+                MoedaEntry.COLUMN_MOEDA_CODE + " TEXT UNIQUE NOT NULL, " +
+                MoedaEntry.COLUMN_MOEDA_NAME + " TEXT UNIQUE NOT NULL, " +
+                MoedaEntry.COLUMN_MOEDA_DATE + " INTEGER NOT NULL, " +
+                MoedaEntry.COLUMN_MOEDA_RATE + " REAL NOT NULL, " +
                 " );";
 
         db.execSQL(SQL_CREATE_MOEDA_TABLE);
