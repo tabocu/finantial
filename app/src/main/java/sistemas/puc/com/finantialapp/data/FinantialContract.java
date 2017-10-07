@@ -36,7 +36,7 @@ public class FinantialContract {
 
         public static final String TABLE_NAME = "moeda";
 
-        public static final String COLUMN_MOEDA_CODE = "moeda_initials";
+        public static final String COLUMN_MOEDA_CODE = "moeda_code";
         public static final String COLUMN_MOEDA_NAME = "moeda_name";
         public static final String COLUMN_MOEDA_DATE = "moeda_date";
         public static final String COLUMN_MOEDA_RATE = "moeda_rate";
