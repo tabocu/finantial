@@ -25,8 +25,6 @@ public class FetchRatesTask extends AsyncTask<Void, Void, List<MoedaItem>>{
 
     @Override
     protected List<MoedaItem> doInBackground(Void... voids) {
-        // These two need to be declared outside the try/catch
-        // so that they can be closed in the finally block.
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
@@ -41,7 +39,6 @@ public class FetchRatesTask extends AsyncTask<Void, Void, List<MoedaItem>>{
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-            // Read the input stream into a String
             InputStream inputStream = urlConnection.getInputStream();
             StringBuffer buffer = new StringBuffer();
             if (inputStream == null) {
@@ -51,7 +48,6 @@ public class FetchRatesTask extends AsyncTask<Void, Void, List<MoedaItem>>{
 
             String line;
             while ((line = reader.readLine()) != null) {
-                // \n is not necessary but it makes debugging easier.
                 buffer.append(line + "\n");
             }
 
@@ -76,7 +72,7 @@ public class FetchRatesTask extends AsyncTask<Void, Void, List<MoedaItem>>{
             }
         }
 
-        // Call parser here to parse ratesJsonStr
+        // TODO Call parser here to parse ratesJsonStr
         // then return the object created by it.
 
         return null;

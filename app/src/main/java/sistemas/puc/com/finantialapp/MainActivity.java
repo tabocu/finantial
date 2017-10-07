@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
             Database.update(this);
-            FetchRatesTask frt = new FetchRatesTask();
-            frt.execute();
             return true;
         }
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import sistemas.puc.com.finantialapp.FetchRatesTask;
 import sistemas.puc.com.finantialapp.entities.IndiceItem;
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
 import sistemas.puc.com.finantialapp.entities.TesouroItem;
@@ -66,6 +67,8 @@ public final class Database {
     }
 
     public static void update(Context c) {
+        FetchRatesTask frt = new FetchRatesTask();
+        frt.execute();
         Toast.makeText(c, "Database updated.", Toast.LENGTH_SHORT).show();
     }
 }
