@@ -1,5 +1,6 @@
 package sistemas.puc.com.finantialapp;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -13,26 +14,33 @@ import java.util.List;
 
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
 
-public class FetchRatesTask extends AsyncTask<Void, Void, List<MoedaItem>>{
+public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
 
-    private static final String FIXER_URL = "http://api.fixer.io/latest?base=BRL";
+    private static final String DEFAULT_FIXER_URL = "http://api.fixer.io/latest?base=BRL";
+    private static final String FIXER_URL = "http://api.fixer.io/latest?";
+    private static final String BASE_PARAM = "base";
     private final String LOG_TAG = FetchRatesTask.class.getSimpleName();
 
     @Override
-    protected void onPreExecute(){
-
-    }
+    protected void onPreExecute(){}
 
     @Override
-    protected List<MoedaItem> doInBackground(Void... voids) {
+    protected List<MoedaItem> doInBackground(String... params) {
+
+        if (params.length != 1) {
+            return null;
+        }
+
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
         String ratesJsonStr = null;
 
         try {
-            // Construct the URL for the Fixer.io query
-            URL url = new URL(FIXER_URL);
+            Uri builtUri = Uri.parse(FIXER_URL).buildUpon()
+                    .appendQueryParameter(BASE_PARAM, params[0])
+                    .build();
+            URL url = new URL(builtUri.toString());
 
             // Create the request and open the connection
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -56,6 +64,7 @@ public class FetchRatesTask extends AsyncTask<Void, Void, List<MoedaItem>>{
             } else {
                 return null;
             }
+            Log.d(LOG_TAG, ratesJsonStr);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
             return null;
@@ -79,12 +88,8 @@ public class FetchRatesTask extends AsyncTask<Void, Void, List<MoedaItem>>{
     }
 
     @Override
-    protected void onProgressUpdate(Void... voids) {
-
-    }
+    protected void onProgressUpdate(Void... voids) {}
 
     @Override
-    protected void onPostExecute(List<MoedaItem> result) {
-
-    }
+    protected void onPostExecute(List<MoedaItem> result) {}
 }
