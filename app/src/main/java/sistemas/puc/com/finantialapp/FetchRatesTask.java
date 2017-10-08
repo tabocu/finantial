@@ -16,7 +16,6 @@ import sistemas.puc.com.finantialapp.entities.MoedaItem;
 
 public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
 
-    private static final String DEFAULT_FIXER_URL = "http://api.fixer.io/latest?base=BRL";
     private static final String FIXER_URL = "http://api.fixer.io/latest?";
     private static final String BASE_PARAM = "base";
     private final String LOG_TAG = FetchRatesTask.class.getSimpleName();
