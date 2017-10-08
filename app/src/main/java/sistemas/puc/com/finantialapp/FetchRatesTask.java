@@ -63,7 +63,6 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
             } else {
                 return null;
             }
-            Log.d(LOG_TAG, ratesJsonStr);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
             return null;
