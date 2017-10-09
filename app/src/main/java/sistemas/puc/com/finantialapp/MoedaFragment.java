@@ -13,6 +13,7 @@ import java.util.List;
 import sistemas.puc.com.finantialapp.adapters.MoedaAdapter;
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
 import sistemas.puc.com.finantialapp.model.Database;
+import sistemas.puc.com.finantialapp.util.DividerItemDecoration;
 
 public class MoedaFragment extends Fragment {
 
@@ -26,7 +27,13 @@ public class MoedaFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_moeda, container, false);
 
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
+        itemDecoration.setLastItemIncluded(false);
+        itemDecoration.setPaddingLeftDp(72);
+        itemDecoration.setPaddingRightDp(16);
+
         m_recyclerView = (RecyclerView) rootView.findViewById(R.id.listview_moeda);
+        m_recyclerView.addItemDecoration(itemDecoration);
         m_recyclerView.setHasFixedSize(true);
 
         m_layoutManager = new LinearLayoutManager(getContext());
