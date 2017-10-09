@@ -3,6 +3,7 @@ package sistemas.puc.com.finantialapp.util;
 import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,6 +25,18 @@ public final class Util {
     public static String getDateStringFromLong(@IntRange(from=0) long value) {
         Date date = new Date(value);
         SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+        return formater.format(date);
+    }
+
+    public static String getDayStringFromLong(@IntRange(from=0) long value) {
+        Date date = new Date(value);
+        SimpleDateFormat formater = new SimpleDateFormat("dd");
+        return formater.format(date);
+    }
+
+    public static String getMonthStringFromLong(@IntRange(from=0) long value) {
+        Date date = new Date(value);
+        SimpleDateFormat formater = new SimpleDateFormat("MMM",new Locale("pt", "BR"));
         return formater.format(date);
     }
 
