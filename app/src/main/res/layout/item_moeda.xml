@@ -9,7 +9,7 @@
     android:clickable="true">
 
     <TextView
-        android:id="@+id/item_moeda_code_text_view"
+        android:id="@+id/item_moeda_code_textview"
         android:layout_width="@dimen/icon_list_size"
         android:layout_height="@dimen/icon_list_size"
         android:layout_centerVertical="true"
@@ -27,7 +27,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/list_item_padding"
         android:layout_marginRight="@dimen/list_item_padding"
-        android:layout_toEndOf="@id/item_moeda_code_text_view"
+        android:layout_toEndOf="@id/item_moeda_code_textview"
         android:layout_toStartOf="@+id/secondary_action"
         android:orientation="vertical"
         android:paddingBottom="@dimen/list_item_padding"
@@ -35,14 +35,14 @@
 
         <TextView
             tools:text="Euro"
-            android:id="@+id/item_moeda_nome_textview"
+            android:id="@+id/item_moeda_name_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Body2"/>
 
         <TextView
             tools:text="R$4,30"
-            android:id="@+id/item_moeda_valor_textview"
+            android:id="@+id/item_moeda_value_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Body1"/>
@@ -63,20 +63,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="20sp"/>
+            android:textSize="18sp"/>
 
         <TextView
             tools:text="APR"
             android:id="@+id/item_moeda_month_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="12sp"/>
 
     </LinearLayout>
-    <View
-        android:layout_height="1dp"
-        android:layout_width="match_parent"
-        android:background="#DDDDDD"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/lines_container"/>
 </RelativeLayout>
