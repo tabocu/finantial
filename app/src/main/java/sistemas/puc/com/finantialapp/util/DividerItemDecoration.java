@@ -8,7 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import static sistemas.puc.com.finantialapp.util.Density.dip2px;
+import static sistemas.puc.com.finantialapp.util.DensityUtils.dip2px;
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
