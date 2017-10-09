@@ -4,6 +4,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -79,8 +81,12 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
             }
         }
 
-        // TODO: Call parser here to parse ratesJsonStr
-        // then return the object created by it.
+        try {
+            return getRatesFromJson(ratesJsonStr);
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, e.getMessage(), e);
+            e.printStackTrace();
+        }
 
         return null;
     }
@@ -90,4 +96,8 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
 
     @Override
     protected void onPostExecute(List<MoedaItem> result) {}
+
+    private List<MoedaItem> getRatesFromJson(String ratesJsonStr) throws JSONException{
+        return null;
+    }
 }
