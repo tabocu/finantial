@@ -21,34 +21,39 @@ public class MoedaAdapter extends AbstractListAdapter<MoedaItem,MoedaAdapter.Vie
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        public TextView codigoMoeda;
         public TextView nomeMoeda;
         public TextView cotacaoMoeda;
-        public TextView dataMoeda;
+        public TextView diaMoeda;
+        public TextView mesMoeda;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            nomeMoeda = (TextView) itemView.findViewById(R.id.list_item_nome_moeda_textview);
-            cotacaoMoeda = (TextView) itemView.findViewById(R.id.list_item_cotacao_moeda_textview);
-            dataMoeda = (TextView) itemView.findViewById(R.id.list_item_data_moeda_textview);
+            codigoMoeda = (TextView) itemView.findViewById(R.id.item_moeda_code_textview);
+            nomeMoeda = (TextView) itemView.findViewById(R.id.item_moeda_name_textview);
+            cotacaoMoeda = (TextView) itemView.findViewById(R.id.item_moeda_value_textview);
+            diaMoeda = (TextView) itemView.findViewById(R.id.item_moeda_day_textview);
+            mesMoeda = (TextView) itemView.findViewById(R.id.item_moeda_month_textview);
         }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_moeda, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_moeda, parent, false);
         ViewHolder holder = new ViewHolder(v);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.codigoMoeda.setText(getItem(position).getCodigo());
         holder.nomeMoeda.setText(getItem(position).getNome());
 
         double cotacao = getItem(position).getCotacao();
         holder.cotacaoMoeda.setText(Util.getRealStringFromDouble(cotacao));
 
         long time = getItem(position).getTime();
-        holder.dataMoeda.setText(Util.getDateStringFromLong(time));
+        holder.diaMoeda.setText(Util.getDayStringFromLong(time));
+        holder.mesMoeda.setText(Util.getMonthStringFromLong(time));
     }
 }
