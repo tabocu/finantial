@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_heigh"
+    android:layout_height="@dimen/list_item_height"
     android:paddingEnd="@dimen/list_item_padding"
     android:paddingStart="@dimen/list_item_padding"
     android:background="?selectableItemBackground"
@@ -19,60 +19,28 @@
         android:textStyle="bold"
         tools:text="EUR" />
 
-    <LinearLayout
-        android:id="@+id/lines_container"
+    <TextView
+        android:id="@+id/item_moeda_name_textview"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/list_item_padding"
-        android:layout_marginRight="@dimen/list_item_padding"
-        android:layout_toEndOf="@id/item_moeda_code_textview"
-        android:layout_toStartOf="@+id/secondary_action"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/list_item_padding"
-        android:paddingTop="@dimen/list_item_padding">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/list_item_padding"
+        android:layout_toEndOf="@+id/item_moeda_code_textview"
+        android:layout_toStartOf="@+id/item_moeda_value_textview"
+        android:gravity="center_vertical"
+        android:textAppearance="@android:style/TextAppearance.Material.Body2"
+        android:textSize="16sp"
+        tools:text="Euro" />
 
-        <TextView
-            tools:text="Euro"
-            android:id="@+id/item_moeda_name_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/TextAppearance.AppCompat.Body2"/>
+    <TextView
+        android:id="@+id/item_moeda_value_textview"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical|right"
+        android:textAllCaps="false"
+        android:textAppearance="@android:style/TextAppearance.Material"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="R$4,30" />
 
-        <TextView
-            tools:text="R$4,30"
-            android:id="@+id/item_moeda_value_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/TextAppearance.AppCompat.Body1"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/secondary_action"
-        android:orientation="vertical"
-        android:layout_width="@dimen/icon_list_size"
-        android:layout_height="@dimen/icon_list_size"
-        android:layout_marginStart="@dimen/list_item_padding"
-        android:layout_marginTop="@dimen/list_item_padding"
-        android:layout_alignParentEnd="true">
-
-        <TextView
-            tools:text="18"
-            android:id="@+id/item_moeda_day_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="18sp"/>
-
-        <TextView
-            tools:text="APR"
-            android:id="@+id/item_moeda_month_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textSize="12sp"/>
-
-    </LinearLayout>
 </RelativeLayout>

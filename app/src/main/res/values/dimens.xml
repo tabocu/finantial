@@ -10,6 +10,6 @@
 
     <!-- List dimensions -->
     <dimen name="icon_list_size">40dp</dimen>
-    <dimen name="list_item_heigh">72dp</dimen>
+    <dimen name="list_item_height">72dp</dimen>
     <dimen name="list_item_padding">16dp</dimen>
 </resources>

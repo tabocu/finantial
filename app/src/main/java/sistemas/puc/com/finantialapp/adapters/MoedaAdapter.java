@@ -24,16 +24,12 @@ public class MoedaAdapter extends AbstractListAdapter<MoedaItem,MoedaAdapter.Vie
         public TextView codigoMoeda;
         public TextView nomeMoeda;
         public TextView cotacaoMoeda;
-        public TextView diaMoeda;
-        public TextView mesMoeda;
 
         public ViewHolder(View itemView) {
             super(itemView);
             codigoMoeda = (TextView) itemView.findViewById(R.id.item_moeda_code_textview);
             nomeMoeda = (TextView) itemView.findViewById(R.id.item_moeda_name_textview);
             cotacaoMoeda = (TextView) itemView.findViewById(R.id.item_moeda_value_textview);
-            diaMoeda = (TextView) itemView.findViewById(R.id.item_moeda_day_textview);
-            mesMoeda = (TextView) itemView.findViewById(R.id.item_moeda_month_textview);
         }
     }
 
@@ -51,9 +47,5 @@ public class MoedaAdapter extends AbstractListAdapter<MoedaItem,MoedaAdapter.Vie
 
         double cotacao = getItem(position).getCotacao();
         holder.cotacaoMoeda.setText(Util.getRealStringFromDouble(cotacao));
-
-        long time = getItem(position).getTime();
-        holder.diaMoeda.setText(Util.getDayStringFromLong(time));
-        holder.mesMoeda.setText(Util.getMonthStringFromLong(time));
     }
 }
