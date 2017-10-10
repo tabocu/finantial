@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
+import sistemas.puc.com.finantialapp.model.MoedaMap;
 import sistemas.puc.com.finantialapp.util.Util;
 
 public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
@@ -105,21 +106,22 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
     private List<MoedaItem> getRatesFromJson(String jsonStr) throws JSONException{
 
         final String FIXER_RATES = "rates";
+        final String FIXER_DATE = "date";
 
         List<MoedaItem> result = new ArrayList<>();
 
         JSONObject json = new JSONObject(jsonStr);
         JSONObject ratesJson = json.getJSONObject(FIXER_RATES);
+        String date = json.getString(FIXER_DATE);
+        long time = Util.getTimeFromDateString(date);
 
         Iterator<String> rates = ratesJson.keys();
 
         while (rates.hasNext()) {
             String code = rates.next();
-            String name = "NameFromHash"; // TODO: create a hashtable to get the name from code.
+            String name = MoedaMap.getCurrencyName(code);
             double rate = ratesJson.getDouble(code);
-            // Temporarily using a placeholder Date before
-            // deciding if date should even be in MoedaItem.
-            result.add(new MoedaItem(code, name, rate, Util.getTimeFromDate(7,10,2017)));
+            result.add(new MoedaItem(code, name, rate, time));
         }
 
         return result;

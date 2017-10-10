@@ -2,9 +2,13 @@ package sistemas.puc.com.finantialapp.util;
 
 import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
+import android.support.annotation.Size;
+import android.util.Log;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Currency;
@@ -13,6 +17,8 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public final class Util {
+
+    private static String LOG_TAG = "Util";
 
     private Util() {}
 
@@ -46,5 +52,19 @@ public final class Util {
         Calendar calendar = new GregorianCalendar();
         calendar.set(year, month-1, day);
         return calendar.getTime().getTime();
+    }
+
+    public static long getTimeFromDateString(@NonNull @Size(10) String dateString) {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", new Locale("pt", "BR"));
+        Date date = null;
+        long time = 0;
+        try {
+            date = formatter.parse(dateString);
+            time = date.getTime();
+        } catch (ParseException e) {
+            Log.e(LOG_TAG, e.toString());
+            e.printStackTrace();
+        }
+        return time;
     }
 }
