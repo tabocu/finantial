@@ -1,5 +1,7 @@
 package sistemas.puc.com.finantialapp.model;
 
+import android.support.annotation.NonNull;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,9 +42,17 @@ public class MoedaMap {
         result.put("SGD", "Dólar de Singapura");
         result.put("THB", "Baht");
         result.put("TRY", "Nova Lira Turca");
-        result.put("USD", "Dólar");
+        result.put("USD", "Dólar Americano");
         result.put("ZAR", "Rand");
 
         return Collections.unmodifiableMap(result);
+    }
+
+    /**
+     * @param code Currency code following ISO 4217.
+     * @return     The currency name in portuguese.
+     */
+    public static String getCurrencyName(@NonNull String code) {
+        return MOEDA_MAP.get(code);
     }
 }
