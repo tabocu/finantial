@@ -1,5 +1,6 @@
 package sistemas.puc.com.finantialapp;
 
+import android.content.ContentValues;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -18,11 +19,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import sistemas.puc.com.finantialapp.data.FinantialContract;
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
 import sistemas.puc.com.finantialapp.model.MoedaMap;
 import sistemas.puc.com.finantialapp.util.Util;
 
-public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
+public class FetchRatesTask extends AsyncTask<String, Void, List<ContentValues>>{
 
     private static final String FIXER_URL = "http://api.fixer.io/latest?";
     private static final String BASE_PARAM = "base";
@@ -32,7 +34,7 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
     protected void onPreExecute(){}
 
     @Override
-    protected List<MoedaItem> doInBackground(String... params) {
+    protected List<ContentValues> doInBackground(String... params) {
 
         if (params.length != 1) {
             return null;
@@ -101,14 +103,14 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
     protected void onProgressUpdate(Void... voids) {}
 
     @Override
-    protected void onPostExecute(List<MoedaItem> result) {}
+    protected void onPostExecute(List<ContentValues> result) {}
 
-    private List<MoedaItem> getRatesFromJson(String jsonStr) throws JSONException{
+    private List<ContentValues> getRatesFromJson(String jsonStr) throws JSONException{
 
         final String FIXER_RATES = "rates";
         final String FIXER_DATE = "date";
 
-        List<MoedaItem> result = new ArrayList<>();
+        List<ContentValues> result = new ArrayList<>();
 
         JSONObject json = new JSONObject(jsonStr);
         JSONObject ratesJson = json.getJSONObject(FIXER_RATES);
@@ -121,7 +123,14 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
             String code = rates.next();
             String name = MoedaMap.getCurrencyName(code);
             double rate = ratesJson.getDouble(code);
-            result.add(new MoedaItem(code, name, rate, time));
+
+            ContentValues moedaValues = new ContentValues();
+            moedaValues.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_CODE, code);
+            moedaValues.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_NAME, name);
+            moedaValues.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_RATE, rate);
+            moedaValues.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_DATE, time);
+
+            result.add(moedaValues);
         }
 
         return result;
