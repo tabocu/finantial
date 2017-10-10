@@ -4,7 +4,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,9 +14,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
+import sistemas.puc.com.finantialapp.util.Util;
 
 public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
 
@@ -97,7 +102,26 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<MoedaItem>>{
     @Override
     protected void onPostExecute(List<MoedaItem> result) {}
 
-    private List<MoedaItem> getRatesFromJson(String ratesJsonStr) throws JSONException{
-        return null;
+    private List<MoedaItem> getRatesFromJson(String jsonStr) throws JSONException{
+
+        final String FIXER_RATES = "rates";
+
+        List<MoedaItem> result = new ArrayList<>();
+
+        JSONObject json = new JSONObject(jsonStr);
+        JSONObject ratesJson = json.getJSONObject(FIXER_RATES);
+
+        Iterator<String> rates = ratesJson.keys();
+
+        while (rates.hasNext()) {
+            String code = rates.next();
+            String name = "NameFromHash"; // TODO: create a hashtable to get the name from code.
+            double rate = ratesJson.getDouble(code);
+            // Temporarily using a placeholder Date before
+            // deciding if date should even be in MoedaItem.
+            result.add(new MoedaItem(code, name, rate, Util.getTimeFromDate(7,10,2017)));
+        }
+
+        return result;
     }
 }
