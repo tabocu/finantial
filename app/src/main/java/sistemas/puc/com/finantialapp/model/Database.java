@@ -68,7 +68,7 @@ public final class Database {
     }
 
     public static void update(Context c) {
-        FetchRatesTask frt = new FetchRatesTask();
+        FetchRatesTask frt = new FetchRatesTask(c);
         frt.execute("BRL"); // TODO: where should this string come from?
         Toast.makeText(c, "Database updated.", Toast.LENGTH_SHORT).show();
     }
