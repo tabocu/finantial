@@ -1,6 +1,7 @@
 package sistemas.puc.com.finantialapp;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -29,6 +30,11 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<ContentValues>>
     private static final String FIXER_URL = "http://api.fixer.io/latest?";
     private static final String BASE_PARAM = "base";
     private final String LOG_TAG = FetchRatesTask.class.getSimpleName();
+    private Context m_context;
+
+    public FetchRatesTask(Context context) {
+        m_context = context;
+    }
 
     @Override
     protected void onPreExecute(){}
@@ -103,7 +109,12 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<ContentValues>>
     protected void onProgressUpdate(Void... voids) {}
 
     @Override
-    protected void onPostExecute(List<ContentValues> result) {}
+    protected void onPostExecute(List<ContentValues> result) {
+        if (result.size() > 0) {
+            ContentValues[] cvArray = result.toArray(new ContentValues[result.size()]);
+            m_context.getContentResolver().bulkInsert(FinantialContract.MoedaEntry.CONTENT_URI, cvArray);
+        }
+    }
 
     private List<ContentValues> getRatesFromJson(String jsonStr) throws JSONException{
 
