@@ -25,6 +25,11 @@
             android:name=".ConversaoActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+        <provider
+            android:name=".data.FinantialProvider"
+            android:authorities="sistemas.puc.com.finantialapp"
+            android:exported="false"
+            android:syncable="true" />
     </application>
 
 </manifest>

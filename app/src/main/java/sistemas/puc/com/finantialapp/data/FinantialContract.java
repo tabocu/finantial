@@ -8,7 +8,7 @@ import android.text.format.Time;
 
 public class FinantialContract {
 
-    public static final String CONTENT_AUTHORITY = "sistemas.puc.com.finantialapp.app";
+    public static final String CONTENT_AUTHORITY = "sistemas.puc.com.finantialapp";
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 

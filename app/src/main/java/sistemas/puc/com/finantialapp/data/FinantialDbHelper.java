@@ -23,7 +23,7 @@ public class FinantialDbHelper extends SQLiteOpenHelper {
                 MoedaEntry.COLUMN_MOEDA_CODE + " TEXT UNIQUE NOT NULL, " +
                 MoedaEntry.COLUMN_MOEDA_NAME + " TEXT UNIQUE NOT NULL, " +
                 MoedaEntry.COLUMN_MOEDA_DATE + " INTEGER NOT NULL, " +
-                MoedaEntry.COLUMN_MOEDA_RATE + " REAL NOT NULL, " +
+                MoedaEntry.COLUMN_MOEDA_RATE + " REAL NOT NULL " +
                 " );";
 
         db.execSQL(SQL_CREATE_MOEDA_TABLE);
