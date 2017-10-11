@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import sistemas.puc.com.finantialapp.adapters.MoedaAdapter;
+import sistemas.puc.com.finantialapp.adapters.MoedaCursorAdapter;
+import sistemas.puc.com.finantialapp.data.FinantialContract;
+import sistemas.puc.com.finantialapp.data.FinantialProvider;
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
 import sistemas.puc.com.finantialapp.model.Database;
 import sistemas.puc.com.finantialapp.util.DividerItemDecoration;
@@ -39,10 +42,16 @@ public class MoedaFragment extends Fragment {
         m_layoutManager = new LinearLayoutManager(getContext());
         m_recyclerView.setLayoutManager(m_layoutManager);
 
-        // get data set
-        List<MoedaItem> moedaList = Database.getMoedaList();
-
-        m_adapter = new MoedaAdapter(moedaList);
+        m_adapter = new MoedaCursorAdapter(getContext(),
+                getContext().getContentResolver().query(
+                        FinantialContract.MoedaEntry.CONTENT_URI,
+                        new String[]{
+                                FinantialContract.MoedaEntry.COLUMN_MOEDA_CODE,
+                                FinantialContract.MoedaEntry.COLUMN_MOEDA_DATE,
+                                FinantialContract.MoedaEntry.COLUMN_MOEDA_NAME,
+                                FinantialContract.MoedaEntry.COLUMN_MOEDA_RATE,
+                        },
+                        null,null,null));
 
         m_recyclerView.setAdapter(m_adapter);
 
