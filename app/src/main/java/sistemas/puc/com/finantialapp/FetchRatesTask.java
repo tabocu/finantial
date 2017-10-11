@@ -111,6 +111,7 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<ContentValues>>
     @Override
     protected void onPostExecute(List<ContentValues> result) {
         if (result.size() > 0) {
+            m_context.getContentResolver().delete(FinantialContract.MoedaEntry.CONTENT_URI, null, null);
             ContentValues[] cvArray = result.toArray(new ContentValues[result.size()]);
             m_context.getContentResolver().bulkInsert(FinantialContract.MoedaEntry.CONTENT_URI, cvArray);
         }
