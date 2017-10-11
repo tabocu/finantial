@@ -22,9 +22,12 @@ public final class Util {
 
     private Util() {}
 
-    public static String getRealStringFromDouble(@FloatRange(from=0) double value) {
+    public static String getRealStringFromDouble(@FloatRange(from=0) double value,
+                                                 @IntRange(from=0) int fractionDigits) {
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         numberFormat.setCurrency(Currency.getInstance("BRL"));
+        numberFormat.setMaximumFractionDigits(fractionDigits);
+        numberFormat.setMinimumFractionDigits(fractionDigits);
         return numberFormat.format(value);
     }
 

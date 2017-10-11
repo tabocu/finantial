@@ -46,6 +46,6 @@ public class MoedaAdapter extends AbstractListAdapter<MoedaItem,MoedaAdapter.Vie
         holder.nomeMoeda.setText(getItem(position).getNome());
 
         double cotacao = getItem(position).getCotacao();
-        holder.cotacaoMoeda.setText(Util.getRealStringFromDouble(cotacao));
+        holder.cotacaoMoeda.setText(Util.getRealStringFromDouble(cotacao,4));
     }
 }
