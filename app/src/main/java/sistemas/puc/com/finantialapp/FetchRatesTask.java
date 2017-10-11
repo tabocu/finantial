@@ -134,7 +134,7 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<ContentValues>>
         while (rates.hasNext()) {
             String code = rates.next();
             String name = MoedaMap.getCurrencyName(code);
-            double rate = ratesJson.getDouble(code);
+            double rate = 1.0/ratesJson.getDouble(code);
 
             ContentValues moedaValues = new ContentValues();
             moedaValues.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_CODE, code);
