@@ -53,6 +53,6 @@ public class MoedaCursorAdapter extends AbstractCursorAdapter<MoedaCursorAdapter
         holder.nomeMoeda.setText(cursor.getString(columnMoedaName));
 
         double cotacao = cursor.getDouble(columnMoedaRate);
-        holder.cotacaoMoeda.setText(Util.getRealStringFromDouble(cotacao));
+        holder.cotacaoMoeda.setText(Util.getRealStringFromDouble(cotacao,4));
     }
 }
