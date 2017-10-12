@@ -10,20 +10,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import sistemas.puc.com.finantialapp.R;
-import sistemas.puc.com.finantialapp.data.FinantialContract;
+import sistemas.puc.com.finantialapp.data.FinantialContract.MoedaEntry;
 import sistemas.puc.com.finantialapp.util.Util;
 
 public class MoedaCursorAdapter extends AbstractCursorAdapter<MoedaCursorAdapter.ViewHolder> {
 
-    private final int columnMoedaCode;
-    private final int columnMoedaName;
-    private final int columnMoedaRate;
-
     public MoedaCursorAdapter(@NonNull Context context, @NonNull Cursor cursor) {
         super(context, cursor);
-        columnMoedaCode = cursor.getColumnIndexOrThrow(FinantialContract.MoedaEntry.COLUMN_MOEDA_CODE);
-        columnMoedaName = cursor.getColumnIndexOrThrow(FinantialContract.MoedaEntry.COLUMN_MOEDA_NAME);
-        columnMoedaRate = cursor.getColumnIndexOrThrow(FinantialContract.MoedaEntry.COLUMN_MOEDA_RATE);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,6 +42,10 @@ public class MoedaCursorAdapter extends AbstractCursorAdapter<MoedaCursorAdapter
 
     @Override
     public void onBindViewHolder(ViewHolder holder, Cursor cursor) {
+        int columnMoedaCode = cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_CODE);
+        int columnMoedaName = cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_NAME);
+        int columnMoedaRate = cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_RATE);
+
         holder.codigoMoeda.setText(cursor.getString(columnMoedaCode));
         holder.nomeMoeda.setText(cursor.getString(columnMoedaName));
 
