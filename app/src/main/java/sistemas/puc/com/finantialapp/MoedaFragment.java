@@ -1,27 +1,35 @@
 package sistemas.puc.com.finantialapp;
 
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
-import sistemas.puc.com.finantialapp.adapters.MoedaAdapter;
 import sistemas.puc.com.finantialapp.adapters.MoedaCursorAdapter;
-import sistemas.puc.com.finantialapp.data.FinantialContract;
-import sistemas.puc.com.finantialapp.data.FinantialProvider;
-import sistemas.puc.com.finantialapp.entities.MoedaItem;
-import sistemas.puc.com.finantialapp.model.Database;
+import sistemas.puc.com.finantialapp.data.FinantialContract.MoedaEntry;
 import sistemas.puc.com.finantialapp.util.DividerItemDecoration;
 
-public class MoedaFragment extends Fragment {
+public class MoedaFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    private static final Uri MOEDA_URI = MoedaEntry.CONTENT_URI;
+
+    private static final String[] MOEDA_COLUMNS = new String[]{
+            MoedaEntry.TABLE_NAME + "." + MoedaEntry._ID,
+            MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_CODE,
+            MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_NAME,
+            MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_RATE,
+    };
 
     private RecyclerView m_recyclerView;
-    private RecyclerView.Adapter m_adapter;
+    private MoedaCursorAdapter m_adapter;
     private RecyclerView.LayoutManager m_layoutManager;
 
     @Override
@@ -42,19 +50,33 @@ public class MoedaFragment extends Fragment {
         m_layoutManager = new LinearLayoutManager(getContext());
         m_recyclerView.setLayoutManager(m_layoutManager);
 
-        m_adapter = new MoedaCursorAdapter(getContext(),
-                getContext().getContentResolver().query(
-                        FinantialContract.MoedaEntry.CONTENT_URI,
-                        new String[]{
-                                FinantialContract.MoedaEntry.COLUMN_MOEDA_CODE,
-                                FinantialContract.MoedaEntry.COLUMN_MOEDA_DATE,
-                                FinantialContract.MoedaEntry.COLUMN_MOEDA_NAME,
-                                FinantialContract.MoedaEntry.COLUMN_MOEDA_RATE,
-                        },
-                        null,null,null));
+        m_adapter = new MoedaCursorAdapter(getContext(), null);
 
         m_recyclerView.setAdapter(m_adapter);
 
+        getLoaderManager().initLoader(0, null, this);
+
         return rootView;
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(
+                getActivity(),
+                MOEDA_URI,
+                MOEDA_COLUMNS,
+                null,
+                null,
+                null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        m_adapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        m_adapter.swapCursor(null);
     }
 }
