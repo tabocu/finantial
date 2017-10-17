@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import sistemas.puc.com.finantialapp.adapters.MoedaCursorAdapter;
 import sistemas.puc.com.finantialapp.data.FinantialContract.MoedaEntry;
+import sistemas.puc.com.finantialapp.model.Database;
 import sistemas.puc.com.finantialapp.util.DividerItemDecoration;
 
 public class MoedaFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -37,6 +38,9 @@ public class MoedaFragment extends Fragment implements LoaderManager.LoaderCallb
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_moeda, container, false);
+
+        // Update database on startup
+        Database.update(getContext());
 
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
         itemDecoration.setLastItemIncluded(false);
