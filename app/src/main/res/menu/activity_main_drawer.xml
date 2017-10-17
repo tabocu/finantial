@@ -4,19 +4,19 @@
     <group>
         <item
             android:id="@+id/nav_moeda"
-            android:icon="@drawable/ic_menu_moeda"
+            android:icon="@drawable/moeda"
             android:title="@string/titulo_moeda" />
         <item
             android:id="@+id/nav_indice"
-            android:icon="@drawable/ic_menu_indice"
+            android:icon="@drawable/index"
             android:title="@string/titulo_indice" />
         <item
             android:id="@+id/nav_tesouro"
-            android:icon="@drawable/ic_menu_tesouro"
+            android:icon="@drawable/tesouro"
             android:title="@string/titulo_tesouro" />
         <item
             android:id="@+id/nav_sobre"
-            android:icon="@drawable/ic_menu_sobre"
+            android:icon="@drawable/person"
             android:title="@string/titulo_sobre" />
     </group>
 
