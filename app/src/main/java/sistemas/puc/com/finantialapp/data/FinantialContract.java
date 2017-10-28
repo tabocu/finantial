@@ -77,7 +77,12 @@ public class FinantialContract {
 
         public static final String TABLE_NAME = "indice";
 
-        // TODO: Add indice columns definitions
+        public static final String COLUMN_INDICE_CODE = "indice_code";
+        public static final String COLUMN_INDICE_NAME = "indice_name";
+        public static final String COLUMN_INDICE_DATE = "indice_date";
+        public static final String COLUMN_INDICE_MONTH_RATE = "indice_month_rate";
+        public static final String COLUMN_INDICE_YEAR_RATE = "indice_year_rate";
+        public static final String COLUMN_INDICE_TYPE = "indice_type";
 
         public static Uri buildIndiceUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
