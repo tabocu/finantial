@@ -1,5 +1,6 @@
 package sistemas.puc.com.finantialapp;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,11 +15,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import sistemas.puc.com.finantialapp.adapters.MoedaCursorAdapter;
+import sistemas.puc.com.finantialapp.adapters.RecyclerItemClickAdapter;
 import sistemas.puc.com.finantialapp.data.FinantialContract.MoedaEntry;
 import sistemas.puc.com.finantialapp.model.Database;
 import sistemas.puc.com.finantialapp.util.DividerItemDecoration;
 
-public class MoedaFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MoedaFragment extends Fragment implements
+        LoaderManager.LoaderCallbacks<Cursor>,
+        RecyclerItemClickAdapter.OnItemClickListener {
+
+    private static final String DOLAR = "Dolar";
 
     private static final Uri MOEDA_URI = MoedaEntry.CONTENT_URI;
 
@@ -50,6 +56,8 @@ public class MoedaFragment extends Fragment implements LoaderManager.LoaderCallb
         m_recyclerView = (RecyclerView) rootView.findViewById(R.id.listview_moeda);
         m_recyclerView.addItemDecoration(itemDecoration);
         m_recyclerView.setHasFixedSize(true);
+        m_recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickAdapter(getContext(), m_recyclerView, this));
 
         m_layoutManager = new LinearLayoutManager(getContext());
         m_recyclerView.setLayoutManager(m_layoutManager);
@@ -82,5 +90,18 @@ public class MoedaFragment extends Fragment implements LoaderManager.LoaderCallb
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         m_adapter.swapCursor(null);
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Intent intent = new Intent(getContext(), ConversaoActivity.class);
+        intent.putExtra(ConversaoActivity.EXTRA_MOEDA_ESQ, DOLAR);
+        intent.putExtra(ConversaoActivity.EXTRA_MOEDA_DIR, DOLAR);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onLongItemClick(View view, int position) {
+
     }
 }
