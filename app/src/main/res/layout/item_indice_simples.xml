@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hapticFeedbackEnabled="false"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin">
+
+
+    <TextView
+        android:id="@+id/codigo_indice_textview"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="SELIC" />
+
+    <TextView
+        android:id="@+id/nome_indice_textview"
+        android:paddingBottom="4dp"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Sistema Especial de Liquidação e de Custódia" />
+
+
+    <TextView
+        android:id="@+id/item_taxa_indice_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="36sp"
+        tools:text="0,50%" />
+
+
+    <TextView
+        android:id="@+id/item_data_indice_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:text="28/10/2017" />
+
+</LinearLayout>
