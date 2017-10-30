@@ -60,6 +60,13 @@ public abstract class AbstractCursorAdapter<K extends RecyclerView.ViewHolder>
         return 0;
     }
 
+    public Cursor getItemCursor(int position) {
+        if (m_dataValid && m_cursor != null && m_cursor.moveToPosition(position)) {
+            return m_cursor;
+        }
+        return null;
+    }
+
     @Override
     public void setHasStableIds(boolean hasStableIds) {
         super.setHasStableIds(true);
