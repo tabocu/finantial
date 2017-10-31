@@ -9,25 +9,25 @@ public enum IndiceEnum {
     IGPM("Índice Geral de Preços do Mercado", "IGP-M", Type.DOUBLE),
     POUPANCA("Poupança", "POUPANÇA", Type.DOUBLE);
 
-    private String name, code;
-    private Type type;
+    private String m_name, m_code;
+    private Type m_type;
 
     IndiceEnum(String name, String code, Type type) {
-        this.name = name;
-        this.code = code;
-        this.type = type;
+        this.m_name = name;
+        this.m_code = code;
+        this.m_type = type;
     }
 
     public String getName() {
-        return name;
+        return m_name;
     }
 
     public String getCode() {
-        return code;
+        return m_code;
     }
 
     public Type getType() {
-        return type;
+        return m_type;
     }
 
     public enum Type {
