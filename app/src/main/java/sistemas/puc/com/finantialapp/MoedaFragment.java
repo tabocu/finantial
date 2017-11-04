@@ -50,6 +50,7 @@ public class MoedaFragment extends Fragment implements
 
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
         itemDecoration.setLastItemIncluded(false);
+        // TODO: Fix hardcoded numbers
         itemDecoration.setPaddingLeftDp(72);
         itemDecoration.setPaddingRightDp(16);
 
