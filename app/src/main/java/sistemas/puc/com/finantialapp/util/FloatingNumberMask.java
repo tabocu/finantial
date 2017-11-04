@@ -10,23 +10,19 @@ public class FloatingNumberMask implements TextWatcher {
     char m_separator;
     int m_decimals;
     String m_prefix;
+    EditText m_editText;
 
-    public FloatingNumberMask(char separator, int decimals) {
+    public FloatingNumberMask(EditText editText, char separator, int decimals) {
         super();
         m_separator = separator;
         m_decimals = decimals;
         m_prefix = "";
+        m_editText = editText;
     }
 
     public void setPrefix(String prefix) {
         m_prefix = prefix;
     }
-
-    @Override
-    public void beforeTextChanged(CharSequence cs, int start, int count, int after) {}
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
     @Override
     public void afterTextChanged(Editable s) {
@@ -52,8 +48,12 @@ public class FloatingNumberMask implements TextWatcher {
         str = m_prefix + str;
 
         s.replace(0, s.length(), str);
-
+        m_editText.setSelection(m_editText.getText().length());
         m_isEdiging = false;
     }
 
+    @Override
+    public void beforeTextChanged(CharSequence cs, int start, int count, int after) {}
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {}
 }
