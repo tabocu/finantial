@@ -1,53 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:stretchColumns="0,2"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin"
     tools:context="sistemas.puc.com.finantialapp.ConversaoActivity">
-    <TableRow>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/left_textinputlayout_moeda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        tools:text="Dolar Americano" >
 
         <EditText
-            android:id="@+id/moeda_esq_edittext"
-            android:layout_width="wrap_content"
+            android:id="@+id/left_edittext_moeda"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="1,00"
-            android:textAlignment="center"
+            android:digits="0123456789,"
             android:inputType="numberDecimal"
-            android:digits="0123456789,"/>
+            android:textAlignment="textStart"
+            tools:text="1,0000" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="X" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/right_textinputlayout_moeda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        tools:text="Real" >
 
         <EditText
-            android:id="@+id/moeda_dir_edittext"
-            android:layout_width="wrap_content"
+            android:id="@+id/right_edittext_moeda"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="3,10"
-            android:textAlignment="center"
+            android:digits="0123456789,"
             android:inputType="numberDecimal"
-            android:digits="0123456789,"/>
-    </TableRow>
-    <TableRow>
+            android:textAlignment="textStart"
+            tools:text="3,1572" />
+    </android.support.design.widget.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/moeda_esq_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:stretchColumns="0,2">
+        <TableRow>
+            <Spinner
+                android:id="@+id/left_spinner_moeda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-        <Spinner
-            android:id="@+id/moeda_dir_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </TableRow>
-</TableLayout>
+            <Spinner
+                android:id="@+id/right_spinner_moeda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/data_textview_moeda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        tools:text="Cotação de 04/11/2017" />
+</LinearLayout>
+
+
 
