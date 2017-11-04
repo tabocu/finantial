@@ -24,7 +24,7 @@ public class MoedaFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor>,
         RecyclerItemClickAdapter.OnItemClickListener {
 
-    private static final String DOLAR = "Dolar";
+    private static final String REAL = "USD";
 
     private static final Uri MOEDA_URI = MoedaEntry.CONTENT_URI;
 
@@ -38,6 +38,8 @@ public class MoedaFragment extends Fragment implements
     private RecyclerView m_recyclerView;
     private MoedaCursorAdapter m_adapter;
     private RecyclerView.LayoutManager m_layoutManager;
+
+    private Cursor m_cursor = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,19 +88,28 @@ public class MoedaFragment extends Fragment implements
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         m_adapter.swapCursor(data);
+        m_cursor = data;
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         m_adapter.swapCursor(null);
+        m_cursor = null;
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        Intent intent = new Intent(getContext(), ConversaoActivity.class);
-        intent.putExtra(ConversaoActivity.EXTRA_MOEDA_ESQ, DOLAR);
-        intent.putExtra(ConversaoActivity.EXTRA_MOEDA_DIR, DOLAR);
-        startActivity(intent);
+        if (m_cursor != null) {
+            Intent intent = new Intent(getContext(), ConversaoActivity.class);
+            intent.putExtra(ConversaoActivity.EXTRA_LEFT_MOEDA, REAL);
+
+            m_cursor.moveToPosition(position);
+            int codeColumnIndex = m_cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_CODE);
+            String code = m_cursor.getString(codeColumnIndex);
+
+            intent.putExtra(ConversaoActivity.EXTRA_RIGHT_MOEDA, code);
+            startActivity(intent);
+        }
     }
 
     @Override
