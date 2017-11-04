@@ -25,6 +25,7 @@
         </activity>
         <activity
             android:name=".ConversaoActivity"
+            android:label="@string/conversao_name"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity">

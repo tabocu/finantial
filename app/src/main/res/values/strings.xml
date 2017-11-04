@@ -3,6 +3,7 @@
     <!ENTITY version "Versão 0.1">]>
 <resources>
     <string name="app_name">&app_name;</string>
+    <string name="conversao_name">Conversão de Moedas</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -20,5 +21,8 @@
     <string name="titulo_indice">Índices</string>
     <string name="titulo_tesouro">Tesouro</string>
     <string name="titulo_sobre">Sobre</string>
+
+    <!-- ConversaoActivity -->
+    <string name="cotacao_date">Cotação de %1$s</string>
 
 </resources>
