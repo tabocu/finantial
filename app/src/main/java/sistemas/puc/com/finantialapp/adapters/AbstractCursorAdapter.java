@@ -25,12 +25,14 @@ import android.support.v7.widget.RecyclerView;
 public abstract class AbstractCursorAdapter<K extends RecyclerView.ViewHolder>
         extends RecyclerView.Adapter<K> {
 
+    private final Context m_context;
     private Cursor m_cursor;
     private boolean m_dataValid;
     private int m_rowIdColumn;
     private DataSetObserver m_dataSetObserver;
 
     public AbstractCursorAdapter(Context context, Cursor cursor) {
+        m_context = context;
         m_cursor = cursor;
         m_dataValid = cursor != null;
         m_rowIdColumn = m_dataValid ? m_cursor.getColumnIndex("_id") : -1;
@@ -42,6 +44,10 @@ public abstract class AbstractCursorAdapter<K extends RecyclerView.ViewHolder>
 
     public Cursor getCursor() {
         return m_cursor;
+    }
+
+    public Context getContext() {
+        return m_context;
     }
 
     @Override
