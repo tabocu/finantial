@@ -16,7 +16,8 @@
             android:layout_height="wrap_content"
             android:hint="1,00"
             android:textAlignment="center"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:digits="0123456789,"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,7 +30,8 @@
             android:layout_height="wrap_content"
             android:hint="3,10"
             android:textAlignment="center"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:digits="0123456789,"/>
     </TableRow>
     <TableRow>
 
