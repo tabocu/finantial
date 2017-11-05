@@ -18,7 +18,6 @@ public abstract class IndiceItem {
             m_data = data;
             m_taxa = taxa;
         }
-
     }
 
     public static class Duplo extends IndiceItem {
