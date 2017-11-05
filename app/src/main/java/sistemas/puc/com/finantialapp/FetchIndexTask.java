@@ -22,6 +22,7 @@ import java.util.List;
 
 import sistemas.puc.com.finantialapp.data.FinantialContract;
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
+import sistemas.puc.com.finantialapp.model.IndiceEnum;
 import sistemas.puc.com.finantialapp.model.MoedaMap;
 import sistemas.puc.com.finantialapp.util.Util;
 
@@ -142,14 +143,18 @@ public class FetchIndexTask extends AsyncTask<Void, Void, List<ContentValues>>{
             time = Util.getTimeFromDateString(date);
             value = obj.getDouble(BCB_VALUE);
 
-            selic.put(FinantialContract.IndiceEntry.COLUMN_INDICE_CODE, "??");
-            selic.put(FinantialContract.IndiceEntry.COLUMN_INDICE_NAME, "Selic");
+            setupIndiceCV(selic, IndiceEnum.SELIC);
             selic.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, value);
             selic.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, time);
-            selic.put(FinantialContract.IndiceEntry.COLUMN_INDICE_TYPE, "??");
             selic.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, "??");
         }
 
         return selic;
+    }
+
+    private void setupIndiceCV(ContentValues cv, IndiceEnum indiceEnum) {
+        cv.put(FinantialContract.IndiceEntry.COLUMN_INDICE_CODE, indiceEnum.getCode());
+        cv.put(FinantialContract.IndiceEntry.COLUMN_INDICE_NAME, indiceEnum.getName());
+        cv.put(FinantialContract.IndiceEntry.COLUMN_INDICE_TYPE, indiceEnum.getType().toString());
     }
 }
