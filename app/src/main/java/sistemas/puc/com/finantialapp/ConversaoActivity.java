@@ -211,10 +211,10 @@ public class ConversaoActivity extends AppCompatActivity implements
         String valueString = m_leftEditText.getText().toString().replace(SEPARATOR,'.');
         double valueDouble = valueString.isEmpty() ? 0.0 : Double.valueOf(valueString);
 
-        m_leftUpdateField.setRate(m_rightRate/m_leftRate);
-        m_rightUpdateField.setRate(m_leftRate/m_rightRate);
+        valueDouble *= m_leftRate/m_rightRate;
 
-        valueDouble *= m_rightRate/m_leftRate;
+        m_leftUpdateField.setRate(valueDouble);
+        m_rightUpdateField.setRate(1/valueDouble);
 
         m_leftEditText.removeTextChangedListener(m_leftUpdateField);
         m_rightEditText.removeTextChangedListener(m_rightUpdateField);
