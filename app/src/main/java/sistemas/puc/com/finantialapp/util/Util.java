@@ -70,7 +70,12 @@ public final class Util {
         return calendar.getTime().getTime();
     }
 
-    public static long getTimeFromDateString(@NonNull @Size(10) String dateString) {
+    /**
+     * Formats accepted are yyyy-MM-dd or yyyyMM
+     * @param dateString
+     * @return
+     */
+    public static long getTimeFromDateString(@NonNull String dateString) {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", new Locale("pt", "BR"));
         Date date = null;
         long time = 0;
@@ -78,8 +83,13 @@ public final class Util {
             date = formatter.parse(dateString);
             time = date.getTime();
         } catch (ParseException e) {
-            Log.e(LOG_TAG, e.toString());
-            e.printStackTrace();
+            formatter = new SimpleDateFormat("yyyyMM", new Locale("pt", "BR"));
+            try {
+                date = formatter.parse(dateString);
+            } catch (ParseException ex) {
+                Log.e(LOG_TAG, ex.toString());
+                e.printStackTrace();
+            }
         }
         return time;
     }
