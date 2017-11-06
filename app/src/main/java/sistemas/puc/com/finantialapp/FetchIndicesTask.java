@@ -17,16 +17,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import sistemas.puc.com.finantialapp.data.FinantialContract;
-import sistemas.puc.com.finantialapp.entities.MoedaItem;
 import sistemas.puc.com.finantialapp.model.IndiceEnum;
-import sistemas.puc.com.finantialapp.model.MoedaMap;
 import sistemas.puc.com.finantialapp.util.Util;
 
-public class FetchIndexTask extends AsyncTask<Void, Void, List<ContentValues>>{
+public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>{
 
     private final static String BCB_VALUE = "valor";
     private final static String BCB_DATE = "data";
@@ -40,10 +37,10 @@ public class FetchIndexTask extends AsyncTask<Void, Void, List<ContentValues>>{
     private static final String IPCA_URL = "http://servicodados.ibge.gov.br/api/v2/conjunturais/1419/periodos/-1/indicadores";
     private static final String INPC_URL = "http://servicodados.ibge.gov.br/api/v2/conjunturais/1100/periodos/-1/indicadores";
 
-    private final String LOG_TAG = FetchIndexTask.class.getSimpleName();
+    private final String LOG_TAG = FetchIndicesTask.class.getSimpleName();
     private Context m_context;
 
-    public FetchIndexTask(Context context) {
+    public FetchIndicesTask(Context context) {
         m_context = context;
     }
 
@@ -77,9 +74,9 @@ public class FetchIndexTask extends AsyncTask<Void, Void, List<ContentValues>>{
     @Override
     protected void onPostExecute(List<ContentValues> result) {
         if (result.size() > 0) {
-            m_context.getContentResolver().delete(FinantialContract.MoedaEntry.CONTENT_URI, null, null);
+            m_context.getContentResolver().delete(FinantialContract.IndiceEntry.CONTENT_URI, null, null);
             ContentValues[] cvArray = result.toArray(new ContentValues[result.size()]);
-            m_context.getContentResolver().bulkInsert(FinantialContract.MoedaEntry.CONTENT_URI, cvArray);
+            m_context.getContentResolver().bulkInsert(FinantialContract.IndiceEntry.CONTENT_URI, cvArray);
         }
     }
 
