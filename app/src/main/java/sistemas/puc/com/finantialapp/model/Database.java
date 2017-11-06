@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import sistemas.puc.com.finantialapp.FetchIndicesTask;
 import sistemas.puc.com.finantialapp.FetchRatesTask;
 import sistemas.puc.com.finantialapp.MoedaFragment;
 import sistemas.puc.com.finantialapp.entities.IndiceItem;
@@ -71,6 +72,8 @@ public final class Database {
     public static void update(Context c) {
         FetchRatesTask frt = new FetchRatesTask(c);
         frt.execute(MoedaFragment.MOEDA_BASE);
+        FetchIndicesTask fit = new FetchIndicesTask(c);
+        fit.execute();
         Toast.makeText(c, "Database updated.", Toast.LENGTH_SHORT).show();
     }
 }
