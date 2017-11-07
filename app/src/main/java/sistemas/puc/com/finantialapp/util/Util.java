@@ -3,6 +3,7 @@ package sistemas.puc.com.finantialapp.util;
 import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
+import android.support.annotation.Size;
 import android.util.Log;
 
 import java.text.DateFormat;
@@ -87,7 +88,8 @@ public final class Util {
         return time;
     }
 
-    public static String capitalize(String target) {
-        return target.substring(0,1).toUpperCase()+target.substring(1, target.length()).toLowerCase();
+    public static String capitalize(@NonNull @Size(min=2) String target) {
+        return target.substring(0,1).toUpperCase()
+                +target.substring(1, target.length()).toLowerCase();
     }
 }

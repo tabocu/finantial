@@ -97,9 +97,11 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
     @Override
     protected void onPostExecute(List<ContentValues> result) {
         if (result.size() > 0) {
-            m_context.getContentResolver().delete(FinantialContract.IndiceEntry.CONTENT_URI, null, null);
+            m_context.getContentResolver().delete
+                    (FinantialContract.IndiceEntry.CONTENT_URI, null, null);
             ContentValues[] cvArray = result.toArray(new ContentValues[result.size()]);
-            m_context.getContentResolver().bulkInsert(FinantialContract.IndiceEntry.CONTENT_URI, cvArray);
+            m_context.getContentResolver().bulkInsert
+                    (FinantialContract.IndiceEntry.CONTENT_URI, cvArray);
         }
     }
 
@@ -175,7 +177,8 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
         return selic;
     }
 
-    private ContentValues getIndiceFromIBGEJson(String jsonStr, IndiceEnum indiceEnum) throws JSONException {
+    private ContentValues getIndiceFromIBGEJson(String jsonStr,
+                                                IndiceEnum indiceEnum) throws JSONException {
         ContentValues indice = new ContentValues();
         setupIndiceCV(indice, indiceEnum);
 

@@ -1,7 +1,7 @@
 package sistemas.puc.com.finantialapp.model;
 
 public enum IndiceEnum {
-    
+
     SELIC("Selic", "SELIC", Type.SIMPLE),
     IPCA("Índice Nacional de Preços ao Consumidor Amplo", "IPCA", Type.DOUBLE),
     CDI("Certificados de Depósito Interbancário", "CDI", Type.SIMPLE),
