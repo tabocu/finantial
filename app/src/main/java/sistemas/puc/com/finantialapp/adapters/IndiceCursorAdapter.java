@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,18 +48,18 @@ public class IndiceCursorAdapter extends AbstractCursorAdapter<IndiceCursorAdapt
 
         public ViewHolder(View itemView, int viewType) {
             super(itemView);
-            codigoIndice = (TextView) itemView.findViewById(R.id.item_moeda_code_textview);
-            nomeIndice = (TextView) itemView.findViewById(R.id.item_moeda_code_textview);
+            codigoIndice = (TextView) itemView.findViewById(R.id.item_indice_codigo_textview);
+            nomeIndice = (TextView) itemView.findViewById(R.id.item_indice_nome_textview);
             switch(viewType) {
                 case VIEW_TYPE_INDICE_SIMPLES:
-                    dataIndice = (TextView) itemView.findViewById(R.id.item_moeda_code_textview);
-                    taxaIndice = (TextView) itemView.findViewById(R.id.item_moeda_code_textview);
+                    dataIndice = (TextView) itemView.findViewById(R.id.item_indice_data_textview);
+                    taxaIndice = (TextView) itemView.findViewById(R.id.item_indice_taxa_textview);
                     break;
                 case VIEW_TYPE_INDICE_DUPLO:
-                    mesIndice = (TextView) itemView.findViewById(R.id.item_moeda_code_textview);
-                    taxaMesIndice = (TextView) itemView.findViewById(R.id.item_moeda_code_textview);
-                    anoIndice = (TextView) itemView.findViewById(R.id.item_moeda_code_textview);
-                    taxaAnoIndice = (TextView) itemView.findViewById(R.id.item_moeda_code_textview);
+                    mesIndice = (TextView) itemView.findViewById(R.id.item_indice_mes_textview);
+                    taxaMesIndice = (TextView) itemView.findViewById(R.id.item_indice_taxa_mensal_textview);
+                    anoIndice = (TextView) itemView.findViewById(R.id.item_indice_ano_textview);
+                    taxaAnoIndice = (TextView) itemView.findViewById(R.id.item_indice_taxa_anual_textview);
                     break;
             }
         }
@@ -91,15 +92,15 @@ public class IndiceCursorAdapter extends AbstractCursorAdapter<IndiceCursorAdapt
             case VIEW_TYPE_INDICE_SIMPLES:
                 holder.taxaIndice.setText(Util.getPercentStringFromDouble(
                         cursor.getDouble(COLUMN_INDICE_YEAR_RATE), 2));
-                holder.dataIndice.setText(Util.getDateStringFromLong(cursor.getInt(COLUMN_INDICE_DATE)));
+                holder.dataIndice.setText(Util.getDateStringFromLong(cursor.getLong(COLUMN_INDICE_DATE)));
                 break;
             case VIEW_TYPE_INDICE_DUPLO:
                 holder.taxaMesIndice.setText(Util.getPercentStringFromDouble(
                         cursor.getDouble(COLUMN_INDICE_MONTH_RATE), 2));
-                holder.mesIndice.setText(Util.getMonthStringFromLong(cursor.getInt(COLUMN_INDICE_DATE)));
+                holder.mesIndice.setText(Util.getMonthStringFromLong(cursor.getLong(COLUMN_INDICE_DATE)));
                 holder.taxaAnoIndice.setText(Util.getPercentStringFromDouble(
                         cursor.getDouble(COLUMN_INDICE_YEAR_RATE), 2));
-                holder.anoIndice.setText(Util.getYearStringFromLong(cursor.getInt(COLUMN_INDICE_DATE)));
+                holder.anoIndice.setText(Util.getYearStringFromLong(cursor.getLong(COLUMN_INDICE_DATE)));
                 break;
         }
     }
