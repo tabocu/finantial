@@ -24,7 +24,7 @@ public class MoedaFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor>,
         RecyclerItemClickAdapter.OnItemClickListener {
 
-    private static final String REAL = "USD";
+    public static final String MOEDA_BASE = "BRL";
 
     private static final Uri MOEDA_URI = MoedaEntry.CONTENT_URI;
 
@@ -101,7 +101,7 @@ public class MoedaFragment extends Fragment implements
     public void onItemClick(View view, int position) {
         if (m_cursor != null) {
             Intent intent = new Intent(getContext(), ConversaoActivity.class);
-            intent.putExtra(ConversaoActivity.EXTRA_LEFT_MOEDA, REAL);
+            intent.putExtra(ConversaoActivity.EXTRA_LEFT_MOEDA, MOEDA_BASE);
 
             m_cursor.moveToPosition(position);
             int codeColumnIndex = m_cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_CODE);
