@@ -146,8 +146,9 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<ContentValues>>
         }
 
         ContentValues baseMoedaValue = new ContentValues();
+        String baseMoedaName = MoedaMap.getCurrencyName(MoedaFragment.MOEDA_BASE);
         baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_CODE, MoedaFragment.MOEDA_BASE);
-        baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_NAME, MoedaMap.getCurrencyName(MoedaFragment.MOEDA_BASE));
+        baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_NAME, baseMoedaName);
         baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_RATE, 1);
         baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_DATE, time);
         result.add(baseMoedaValue);
