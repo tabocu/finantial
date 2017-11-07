@@ -145,12 +145,12 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<ContentValues>>
             result.add(moedaValues);
         }
 
-        ContentValues brlValue = new ContentValues();
-        brlValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_CODE, MoedaFragment.MOEDA_BASE);
-        brlValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_NAME, MoedaMap.getCurrencyName(MoedaFragment.MOEDA_BASE));
-        brlValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_RATE, 1);
-        brlValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_DATE, time);
-        result.add(brlValue);
+        ContentValues baseMoedaValue = new ContentValues();
+        baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_CODE, MoedaFragment.MOEDA_BASE);
+        baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_NAME, MoedaMap.getCurrencyName(MoedaFragment.MOEDA_BASE));
+        baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_RATE, 1);
+        baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_DATE, time);
+        result.add(baseMoedaValue);
 
         return result;
     }
