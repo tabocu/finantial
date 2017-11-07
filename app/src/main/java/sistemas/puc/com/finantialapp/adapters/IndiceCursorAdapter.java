@@ -13,13 +13,12 @@ import android.widget.TextView;
 import sistemas.puc.com.finantialapp.R;
 import sistemas.puc.com.finantialapp.data.FinantialContract.MoedaEntry;
 import sistemas.puc.com.finantialapp.entities.IndiceItem;
+import sistemas.puc.com.finantialapp.model.IndiceEnum;
 import sistemas.puc.com.finantialapp.util.Util;
 
 public class IndiceCursorAdapter extends AbstractCursorAdapter<IndiceCursorAdapter.ViewHolder> {
 
     private static final int VIEW_TYPE_COUNT = 2;
-    private static final int VIEW_TYPE_INDICE_SIMPLES = 0;
-    private static final int VIEW_TYPE_INDICE_DUPLO = 1;
 
     public static final int COLUMN_INDICE_ID = 0;
     public static final int COLUMN_INDICE_CODE = 1;
@@ -50,12 +49,13 @@ public class IndiceCursorAdapter extends AbstractCursorAdapter<IndiceCursorAdapt
             super(itemView);
             codigoIndice = (TextView) itemView.findViewById(R.id.item_indice_codigo_textview);
             nomeIndice = (TextView) itemView.findViewById(R.id.item_indice_nome_textview);
-            switch(viewType) {
-                case VIEW_TYPE_INDICE_SIMPLES:
+            IndiceEnum.Type indiceType = IndiceEnum.Type.values()[viewType];
+            switch(indiceType) {
+                case SIMPLE:
                     dataIndice = (TextView) itemView.findViewById(R.id.item_indice_data_textview);
                     taxaIndice = (TextView) itemView.findViewById(R.id.item_indice_taxa_textview);
                     break;
-                case VIEW_TYPE_INDICE_DUPLO:
+                case DOUBLE:
                     mesIndice = (TextView) itemView.findViewById(R.id.item_indice_mes_textview);
                     taxaMesIndice = (TextView) itemView.findViewById(R.id.item_indice_taxa_mensal_textview);
                     anoIndice = (TextView) itemView.findViewById(R.id.item_indice_ano_textview);
@@ -66,18 +66,19 @@ public class IndiceCursorAdapter extends AbstractCursorAdapter<IndiceCursorAdapt
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
         int layoutId = -1;
-        switch(viewType) {
-            case VIEW_TYPE_INDICE_SIMPLES:
+        IndiceEnum.Type indiceType = IndiceEnum.Type.values()[type];
+        switch(indiceType) {
+            case SIMPLE:
                 layoutId = R.layout.item_indice_simples;
                 break;
-            case VIEW_TYPE_INDICE_DUPLO:
+            case DOUBLE:
                 layoutId = R.layout.item_indice_duplo;
                 break;
         }
         View v = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
-        ViewHolder holder = new ViewHolder(v,viewType);
+        ViewHolder holder = new ViewHolder(v,type);
         return holder;
     }
 
@@ -86,15 +87,15 @@ public class IndiceCursorAdapter extends AbstractCursorAdapter<IndiceCursorAdapt
         holder.codigoIndice.setText(cursor.getString(COLUMN_INDICE_CODE));
         holder.nomeIndice.setText(cursor.getString(COLUMN_INDICE_NAME));
 
-        int type = cursor.getInt(COLUMN_INDICE_TYPE);
+        IndiceEnum.Type type = IndiceEnum.Type.values()[cursor.getInt(COLUMN_INDICE_TYPE)];
 
         switch (type) {
-            case VIEW_TYPE_INDICE_SIMPLES:
+            case SIMPLE:
                 holder.taxaIndice.setText(Util.getPercentStringFromDouble(
                         cursor.getDouble(COLUMN_INDICE_YEAR_RATE), 2));
                 holder.dataIndice.setText(Util.getDateStringFromLong(cursor.getLong(COLUMN_INDICE_DATE)));
                 break;
-            case VIEW_TYPE_INDICE_DUPLO:
+            case DOUBLE:
                 holder.taxaMesIndice.setText(Util.getPercentStringFromDouble(
                         cursor.getDouble(COLUMN_INDICE_MONTH_RATE), 2));
                 holder.mesIndice.setText(Util.getMonthStringFromLong(cursor.getLong(COLUMN_INDICE_DATE)));
