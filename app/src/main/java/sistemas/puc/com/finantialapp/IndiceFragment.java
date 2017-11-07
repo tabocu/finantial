@@ -48,8 +48,8 @@ public class IndiceFragment extends Fragment implements LoaderManager.LoaderCall
 
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
         itemDecoration.setLastItemIncluded(false);
-        itemDecoration.setPaddingLeftDp(72);
-        itemDecoration.setPaddingRightDp(16);
+        itemDecoration.setPaddingLeftDp(32);
+        itemDecoration.setPaddingRightDp(32);
 
         m_recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_indice);
         m_recyclerView.addItemDecoration(itemDecoration);

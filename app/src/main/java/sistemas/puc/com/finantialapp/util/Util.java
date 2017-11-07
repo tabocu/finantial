@@ -3,7 +3,6 @@ package sistemas.puc.com.finantialapp.util;
 import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
-import android.support.annotation.Size;
 import android.util.Log;
 
 import java.text.DateFormat;
@@ -19,6 +18,9 @@ import java.util.Locale;
 public final class Util {
 
     private static String LOG_TAG = "Util";
+    public final static String DATE_TEMPLATE_FORMAT_1 = "yyyy-MM-dd";
+    public final static String DATE_TEMPLATE_FORMAT_2 = "dd/MM/yyyy";
+    public final static String DATE_TEMPLATE_FORMAT_3 = "yyyyMM";
 
     private Util() {}
 
@@ -52,8 +54,9 @@ public final class Util {
 
     public static String getMonthStringFromLong(@IntRange(from=0) long value) {
         Date date = new Date(value);
-        SimpleDateFormat formater = new SimpleDateFormat("MMMMM",new Locale("pt", "BR"));
-        return formater.format(date);
+        SimpleDateFormat formater = new SimpleDateFormat("MMMM",new Locale("pt", "BR"));
+
+        return capitalize(formater.format(date));
     }
 
     public static String getYearStringFromLong(@IntRange(from=0) long value) {
@@ -70,27 +73,21 @@ public final class Util {
         return calendar.getTime().getTime();
     }
 
-    /**
-     * Formats accepted are yyyy-MM-dd or yyyyMM
-     * @param dateString
-     * @return
-     */
-    public static long getTimeFromDateString(@NonNull String dateString) {
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", new Locale("pt", "BR"));
+    public static long getTimeFromDateString(@NonNull String dateString, @NonNull String template) {
+        DateFormat formatter = new SimpleDateFormat(template, new Locale("pt", "BR"));
         Date date = null;
         long time = 0;
         try {
             date = formatter.parse(dateString);
             time = date.getTime();
         } catch (ParseException e) {
-            formatter = new SimpleDateFormat("yyyyMM", new Locale("pt", "BR"));
-            try {
-                date = formatter.parse(dateString);
-            } catch (ParseException ex) {
-                Log.e(LOG_TAG, ex.toString());
-                e.printStackTrace();
-            }
+            Log.e(LOG_TAG, e.toString());
+            e.printStackTrace();
         }
         return time;
+    }
+
+    public static String capitalize(String target) {
+        return target.substring(0,1).toUpperCase()+target.substring(1, target.length()).toLowerCase();
     }
 }

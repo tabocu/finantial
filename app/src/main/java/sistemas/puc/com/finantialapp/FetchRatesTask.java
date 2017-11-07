@@ -127,7 +127,7 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<ContentValues>>
         JSONObject json = new JSONObject(jsonStr);
         JSONObject ratesJson = json.getJSONObject(FIXER_RATES);
         String date = json.getString(FIXER_DATE);
-        long time = Util.getTimeFromDateString(date);
+        long time = Util.getTimeFromDateString(date, Util.DATE_TEMPLATE_FORMAT_1);
 
         Iterator<String> rates = ratesJson.keys();
 

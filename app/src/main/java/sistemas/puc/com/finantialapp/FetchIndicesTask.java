@@ -165,10 +165,11 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
         JSONObject obj = jsonArray.getJSONObject(jsonArray.length()-1);
 
         date = obj.getString(BCB_DATE);
-        time = Util.getTimeFromDateString(date);
-        value = obj.getDouble(BCB_VALUE);
+        time = Util.getTimeFromDateString(date, Util.DATE_TEMPLATE_FORMAT_2);
+        value = obj.getDouble(BCB_VALUE)/100.0;
 
         selic.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, value);
+        selic.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, 0);
         selic.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, time);
 
         return selic;
@@ -186,15 +187,15 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
 
         JSONObject obj = jsonArray.getJSONObject(IBGE_ANUAL);
         date = obj.getString(IBGE_DATE);
-        time = Util.getTimeFromDateString(date);
-        value = obj.getDouble(IBGE_VALUE);
+        time = Util.getTimeFromDateString(date, Util.DATE_TEMPLATE_FORMAT_3);
+        value = obj.getDouble(IBGE_VALUE)/100.0;
 
         indice.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, value);
         indice.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, time);
 
 
         obj = jsonArray.getJSONObject(IBGE_MENSAL);
-        value = obj.getDouble(IBGE_VALUE);
+        value = obj.getDouble(IBGE_VALUE)/100.0;
         indice.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, value);
 
         return indice;
