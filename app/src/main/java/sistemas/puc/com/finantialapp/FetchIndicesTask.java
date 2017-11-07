@@ -54,11 +54,34 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
         String inpcJsonStr = getJsonStr(INPC_URL);
         String ipcaJsonStr = getJsonStr(IPCA_URL);
 
+        //placeholders
+
+        ContentValues CDI = new ContentValues();
+        setupIndiceCV(CDI, IndiceEnum.CDI);
+        CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, 0.0);
+        CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, 0.0);
+        CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, "201709");
+
+        ContentValues poupanca = new ContentValues();
+        setupIndiceCV(poupanca, IndiceEnum.POUPANCA);
+        poupanca.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, 0.0);
+        poupanca.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, 0.0);
+        poupanca.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, "201709");
+
+        ContentValues IGPM = new ContentValues();
+        setupIndiceCV(IGPM, IndiceEnum.IGPM);
+        IGPM.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, 0.0);
+        IGPM.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, 0.0);
+        IGPM.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, "201709");
+
         try {
             List<ContentValues> result = new ArrayList<>();
             result.add(getSelicFromJson(selicJsonStr));
+            result.add(CDI);
             result.add(getIndiceFromIBGEJson(ipcaJsonStr, IndiceEnum.IPCA));
             result.add(getIndiceFromIBGEJson(inpcJsonStr, IndiceEnum.INPC));
+            result.add(IGPM);
+            result.add(poupanca);
             return result;
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
@@ -180,6 +203,6 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
     private void setupIndiceCV(ContentValues cv, IndiceEnum indiceEnum) {
         cv.put(FinantialContract.IndiceEntry.COLUMN_INDICE_CODE, indiceEnum.getCode());
         cv.put(FinantialContract.IndiceEntry.COLUMN_INDICE_NAME, indiceEnum.getName());
-        cv.put(FinantialContract.IndiceEntry.COLUMN_INDICE_TYPE, indiceEnum.getType().toString());
+        cv.put(FinantialContract.IndiceEntry.COLUMN_INDICE_TYPE, indiceEnum.getType().ordinal());
     }
 }
