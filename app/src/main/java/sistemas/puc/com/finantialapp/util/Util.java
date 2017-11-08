@@ -22,6 +22,7 @@ public final class Util {
     public final static String DATE_TEMPLATE_FORMAT_1 = "yyyy-MM-dd";
     public final static String DATE_TEMPLATE_FORMAT_2 = "dd/MM/yyyy";
     public final static String DATE_TEMPLATE_FORMAT_3 = "yyyyMM";
+    public final static String DATE_TEMPLATE_FORMAT_4 = "MMM/yy";
 
     private Util() {}
 
