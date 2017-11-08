@@ -32,6 +32,7 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
     private static final String IPCA_URL = "http://servicodados.ibge.gov.br/api/v2/conjunturais/1419/periodos/-1/indicadores";
     private static final String INPC_URL = "http://servicodados.ibge.gov.br/api/v2/conjunturais/1100/periodos/-1/indicadores";
     private static final String CDI_URL = "https://www.cetip.com.br";
+    private static final String IGPM_POUCPANCA_URL = "http://sisweb.tesouro.gov.br/apex/f?p=2551:2";
 
     private final String LOG_TAG = FetchIndicesTask.class.getSimpleName();
     private Context m_context;
@@ -50,18 +51,7 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
         String inpcJsonStr = HttpUtils.getStringFromURL(INPC_URL);
         String ipcaJsonStr = HttpUtils.getStringFromURL(IPCA_URL);
         String cdiString = HttpUtils.getStringFromURL(CDI_URL);
-
-
-        //placeholders
-        ContentValues poupanca = setupIndiceCV(IndiceEnum.POUPANCA);
-        poupanca.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, 0.0);
-        poupanca.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, 0.0);
-        poupanca.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, "201709");
-
-        ContentValues IGPM = setupIndiceCV(IndiceEnum.IGPM);
-        IGPM.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, 0.0);
-        IGPM.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, 0.0);
-        IGPM.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, "201709");
+        String igpmPoupancaString = HttpUtils.getStringFromURL(IGPM_POUCPANCA_URL);
 
         try {
             List<ContentValues> result = new ArrayList<>();
@@ -69,8 +59,8 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
             result.add(getCDIFromString(cdiString));
             result.add(getIndiceFromIBGEJson(ipcaJsonStr, IndiceEnum.IPCA));
             result.add(getIndiceFromIBGEJson(inpcJsonStr, IndiceEnum.INPC));
-            result.add(IGPM);
-            result.add(poupanca);
+            result.add(getIGPMFromString(igpmPoupancaString));
+            result.add(getPoupancaFromString(igpmPoupancaString));
             return result;
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
@@ -94,6 +84,38 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
         }
     }
 
+    private ContentValues getIGPMFromString(String igpmString) {
+        String parse[];
+        parse = igpmString.split("IGPM - ")[1].split("</b>");
+        long time = Util.getTimeFromDateString(parse[0], Util.DATE_TEMPLATE_FORMAT_4);
+        parse = parse[1].split("<td align=\"center\" class=\"camposTesouroDireto taxaprecos\">");
+        double month = Double.parseDouble(parse[1].split("</td>")[0].replace(',','.'));
+        double year = Double.parseDouble(parse[2].split("</td>")[0].replace(',','.'));
+
+        ContentValues IGPM = setupIndiceCV(IndiceEnum.IGPM);
+        IGPM.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, month/100.0);
+        IGPM.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, year/100.0);
+        IGPM.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, time);
+
+        return IGPM;
+    }
+
+    private ContentValues getPoupancaFromString(String poupancaString) {
+        String parse[];
+        parse = poupancaString.split("POUPANÇA - ")[1].split("</b>");
+        long time = Util.getTimeFromDateString(parse[0], Util.DATE_TEMPLATE_FORMAT_4);
+        parse = parse[1].split("<td align=\"center\" class=\"camposTesouroDireto taxaprecos\">");
+        double month = Double.parseDouble(parse[1].split("</td>")[0].replace(',','.'));
+        double year = Double.parseDouble(parse[2].split("</td>")[0].replace(',','.'));
+
+        ContentValues poupanca = setupIndiceCV(IndiceEnum.POUPANCA);
+        poupanca.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, month/100.0);
+        poupanca.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, year/100.0);
+        poupanca.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, time);
+
+        return poupanca;
+    }
+
     private ContentValues getCDIFromString(String cdiString) {
         cdiString = cdiString.split("ctl00_Banner_lblTaxDateDI\">")[1];
         cdiString = cdiString.substring(0, cdiString.indexOf("%</span"));
@@ -107,7 +129,7 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
 
         ContentValues CDI = setupIndiceCV(IndiceEnum.CDI);
         CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, 0);
-        CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, cdiRate);
+        CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, cdiRate/100.0);
         CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, time);
 
         return CDI;
