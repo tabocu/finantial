@@ -9,12 +9,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import sistemas.puc.com.finantialapp.data.FinantialContract;
 import sistemas.puc.com.finantialapp.model.IndiceEnum;
-import sistemas.puc.com.finantialapp.util.JsonUtils;
+import sistemas.puc.com.finantialapp.util.HttpUtils;
 import sistemas.puc.com.finantialapp.util.Util;
 
 public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>{
@@ -30,6 +31,7 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
     private static final String SELIC_URL = "http://api.bcb.gov.br/dados/serie/bcdata.sgs.1178/dados/ultimos/1?formato=json";
     private static final String IPCA_URL = "http://servicodados.ibge.gov.br/api/v2/conjunturais/1419/periodos/-1/indicadores";
     private static final String INPC_URL = "http://servicodados.ibge.gov.br/api/v2/conjunturais/1100/periodos/-1/indicadores";
+    private static final String CDI_URL = "https://www.cetip.com.br";
 
     private final String LOG_TAG = FetchIndicesTask.class.getSimpleName();
     private Context m_context;
@@ -44,17 +46,13 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
     @Override
     protected List<ContentValues> doInBackground(Void... voids) {
 
-        String selicJsonStr = JsonUtils.getJsonStr(SELIC_URL);
-        String inpcJsonStr = JsonUtils.getJsonStr(INPC_URL);
-        String ipcaJsonStr = JsonUtils.getJsonStr(IPCA_URL);
+        String selicJsonStr = HttpUtils.getStringFromURL(SELIC_URL);
+        String inpcJsonStr = HttpUtils.getStringFromURL(INPC_URL);
+        String ipcaJsonStr = HttpUtils.getStringFromURL(IPCA_URL);
+        String cdiString = HttpUtils.getStringFromURL(CDI_URL);
+
 
         //placeholders
-
-        ContentValues CDI = setupIndiceCV(IndiceEnum.CDI);
-        CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, 0.0);
-        CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, 0.0);
-        CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, "201709");
-
         ContentValues poupanca = setupIndiceCV(IndiceEnum.POUPANCA);
         poupanca.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, 0.0);
         poupanca.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, 0.0);
@@ -68,7 +66,7 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
         try {
             List<ContentValues> result = new ArrayList<>();
             result.add(getSelicFromJson(selicJsonStr));
-            result.add(CDI);
+            result.add(getCDIFromString(cdiString));
             result.add(getIndiceFromIBGEJson(ipcaJsonStr, IndiceEnum.IPCA));
             result.add(getIndiceFromIBGEJson(inpcJsonStr, IndiceEnum.INPC));
             result.add(IGPM);
@@ -96,6 +94,24 @@ public class FetchIndicesTask extends AsyncTask<Void, Void, List<ContentValues>>
         }
     }
 
+    private ContentValues getCDIFromString(String cdiString) {
+        cdiString = cdiString.split("ctl00_Banner_lblTaxDateDI\">")[1];
+        cdiString = cdiString.substring(0, cdiString.indexOf("%</span"));
+        String cdiDateString = cdiString.substring(1,11);
+
+        double cdiRate = Double.parseDouble(
+                cdiString.substring(cdiString.indexOf("TaxDI\">")+7, cdiString.length())
+                        .replace(',','.'));
+
+        long time = Util.getTimeFromDateString(cdiDateString, Util.DATE_TEMPLATE_FORMAT_2);
+
+        ContentValues CDI = setupIndiceCV(IndiceEnum.CDI);
+        CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_MONTH_RATE, 0);
+        CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_YEAR_RATE, cdiRate);
+        CDI.put(FinantialContract.IndiceEntry.COLUMN_INDICE_DATE, time);
+
+        return CDI;
+    }
 
     private ContentValues getSelicFromJson(String jsonStr) throws JSONException{
 

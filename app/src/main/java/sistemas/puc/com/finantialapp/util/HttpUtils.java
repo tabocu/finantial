@@ -10,11 +10,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class JsonUtils {
+public class HttpUtils {
 
     private static final String LOG_TAG = "JSON_UTILS";
 
-    public static String getJsonStr(String URL) {
+    public static String getStringFromURL(String URL) {
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
