@@ -80,7 +80,7 @@ public class MoedaFragment extends Fragment implements
                 getActivity(),
                 MOEDA_URI,
                 MOEDA_COLUMNS,
-                MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_CODE+" <> ?",
+                MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_CODE + " <> ?",
                 new String[] { MOEDA_BASE },
                 null);
     }
