@@ -58,7 +58,14 @@ public class FinantialContract {
 
         public static final String TABLE_NAME = "tesouro";
 
-        // TODO: Add tesouro columns definitions
+        public static final String COLUMN_TESOURO_NAME = "tesouro_name";
+        public static final String COLUMN_TESOURO_YEAR = "tesouro_year";
+        public static final String COLUMN_TESOURO_EXPIRATION_DATE = "tesouro_expiration_date";
+        public static final String COLUMN_TESOURO_SELLING_INCOME = "tesouro_selling_income";
+        public static final String COLUMN_TESOURO_BUYING_INCOME = "tesouro_buying_income";
+        public static final String COLUMN_TESOURO_SELLING_PRICE = "tesouro_selling_price";
+        public static final String COLUMN_TESOURO_BUYING_PRICE = "tesouro_buying_price";
+        public static final String COLUMN_TESOURO_BUYING_MIN_VALUE = "tesouro_buying_min_value";
 
         public static Uri buildTesouroUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
