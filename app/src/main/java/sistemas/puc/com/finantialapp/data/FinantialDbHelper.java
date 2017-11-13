@@ -6,10 +6,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import sistemas.puc.com.finantialapp.data.FinantialContract.MoedaEntry;
 import sistemas.puc.com.finantialapp.data.FinantialContract.IndiceEntry;
+import sistemas.puc.com.finantialapp.data.FinantialContract.TesouroEntry;
 
 public class FinantialDbHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     static final String DATABASE_NAME = "finantial.db";
 
@@ -37,14 +38,28 @@ public class FinantialDbHelper extends SQLiteOpenHelper {
                 IndiceEntry.COLUMN_INDICE_TYPE       + " INTEGER NOT NULL " +
                 " );";
 
+        final String SQL_CREATE_TESOURO_TABLE = "CREATE TABLE " + TesouroEntry.TABLE_NAME + " (" +
+                TesouroEntry._ID                             + " INTEGER PRIMARY KEY," +
+                TesouroEntry.COLUMN_TESOURO_NAME             + " TEXT UNIQUE NOT NULL, " +
+                TesouroEntry.COLUMN_TESOURO_YEAR             + " INTEGER NOT NULL, " +
+                TesouroEntry.COLUMN_TESOURO_EXPIRATION_DATE  + " INTEGER NOT NULL, " +
+                TesouroEntry.COLUMN_TESOURO_BUYING_INCOME    + " REAL NOT NULL, " +
+                TesouroEntry.COLUMN_TESOURO_SELLING_INCOME   + " REAL NOT NULL, " +
+                TesouroEntry.COLUMN_TESOURO_BUYING_PRICE     + " REAL NOT NULL, " +
+                TesouroEntry.COLUMN_TESOURO_SELLING_PRICE    + " REAL NOT NULL, " +
+                TesouroEntry.COLUMN_TESOURO_BUYING_MIN_VALUE + " REAL NOT NULL " +
+                " );";
+
         db.execSQL(SQL_CREATE_MOEDA_TABLE);
         db.execSQL(SQL_CREATE_INDICE_TABLE);
+        db.execSQL(SQL_CREATE_TESOURO_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + MoedaEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + IndiceEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TesouroEntry.TABLE_NAME);
         onCreate(db);
     }
 }
