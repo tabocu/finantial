@@ -59,6 +59,7 @@ public class FinantialContract {
         public static final String TABLE_NAME = "tesouro";
 
         public static final String COLUMN_TESOURO_NAME = "tesouro_name";
+        public static final String COLUMN_TESOURO_MODE = "tesouro_mode";
         public static final String COLUMN_TESOURO_YEAR = "tesouro_year";
         public static final String COLUMN_TESOURO_EXPIRATION_DATE = "tesouro_expiration_date";
         public static final String COLUMN_TESOURO_SELLING_INCOME = "tesouro_selling_income";
