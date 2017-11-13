@@ -101,13 +101,13 @@ public class MoedaFragment extends Fragment implements
     public void onItemClick(View view, int position) {
         if (m_cursor != null) {
             Intent intent = new Intent(getContext(), ConversaoActivity.class);
-            intent.putExtra(ConversaoActivity.EXTRA_LEFT_MOEDA, MOEDA_BASE);
+            intent.putExtra(ConversaoActivity.EXTRA_RIGHT_MOEDA, MOEDA_BASE);
 
             m_cursor.moveToPosition(position);
             int codeColumnIndex = m_cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_CODE);
             String code = m_cursor.getString(codeColumnIndex);
 
-            intent.putExtra(ConversaoActivity.EXTRA_RIGHT_MOEDA, code);
+            intent.putExtra(ConversaoActivity.EXTRA_LEFT_MOEDA, code);
             startActivity(intent);
         }
     }
