@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hapticFeedbackEnabled="false"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:stretchColumns="0,1,2,3,4">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_span="5"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            tools:text="Prefixado com Juros Semestrais" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_span="5"
+            android:textAlignment="center"
+            tools:text="NTNF - 2021" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp">
+        <TextView android:layout_span="3"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:textSize="16sp"
+            tools:text="Compra" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textSize="16sp"
+            tools:text="Venda" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp">
+
+        <TextView
+            android:layout_span="3"
+            android:textAlignment="viewStart"
+            android:textSize="16sp"
+            tools:text="Rendimento" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            tools:text="4,96" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            tools:text="5,08" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:layout_span="3"
+            android:textAlignment="viewStart"
+            android:textSize="16sp"
+            tools:text="Valor mínimo" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            tools:text="43,61" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:layout_span="3"
+            android:textAlignment="viewStart"
+            android:textSize="16sp"
+            tools:text="Preço unitário" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            tools:text="2.180,66" />
+
+        <TextView
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            tools:text="2.163,94" />
+    </TableRow>
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp">
+
+    <TextView
+        android:layout_span="5"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        tools:text="Vencimento" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_span="5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="28/10/2017" />
+    </TableRow>
+</TableLayout>
