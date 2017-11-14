@@ -44,11 +44,11 @@ public class FinantialDbHelper extends SQLiteOpenHelper {
                 TesouroEntry.COLUMN_TESOURO_MODE             + " TEXT UNIQUE NOT NULL, " +
                 TesouroEntry.COLUMN_TESOURO_YEAR             + " INTEGER NOT NULL, " +
                 TesouroEntry.COLUMN_TESOURO_EXPIRATION_DATE  + " INTEGER NOT NULL, " +
-                TesouroEntry.COLUMN_TESOURO_BUYING_INCOME    + " REAL NOT NULL, " +
+                TesouroEntry.COLUMN_TESOURO_BUYING_INCOME    + " REAL, " +
                 TesouroEntry.COLUMN_TESOURO_SELLING_INCOME   + " REAL NOT NULL, " +
-                TesouroEntry.COLUMN_TESOURO_BUYING_PRICE     + " REAL NOT NULL, " +
+                TesouroEntry.COLUMN_TESOURO_BUYING_PRICE     + " REAL, " +
                 TesouroEntry.COLUMN_TESOURO_SELLING_PRICE    + " REAL NOT NULL, " +
-                TesouroEntry.COLUMN_TESOURO_BUYING_MIN_VALUE + " REAL NOT NULL " +
+                TesouroEntry.COLUMN_TESOURO_BUYING_MIN_VALUE + " REAL " +
                 " );";
 
         db.execSQL(SQL_CREATE_MOEDA_TABLE);
