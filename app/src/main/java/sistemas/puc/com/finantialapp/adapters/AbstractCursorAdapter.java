@@ -22,8 +22,13 @@ import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class AbstractCursorAdapter<K extends RecyclerView.ViewHolder>
         extends RecyclerView.Adapter<K> {
+
+    private final HashSet<Integer> m_selection;
 
     private final Context m_context;
     private Cursor m_cursor;
@@ -32,6 +37,7 @@ public abstract class AbstractCursorAdapter<K extends RecyclerView.ViewHolder>
     private DataSetObserver m_dataSetObserver;
 
     public AbstractCursorAdapter(Context context, Cursor cursor) {
+        m_selection = new HashSet<>();
         m_context = context;
         m_cursor = cursor;
         m_dataValid = cursor != null;
@@ -41,6 +47,32 @@ public abstract class AbstractCursorAdapter<K extends RecyclerView.ViewHolder>
             m_cursor.registerDataSetObserver(m_dataSetObserver);
         }
     }
+
+    public boolean isItemSelected(int id) {
+        return m_selection.contains(id);
+    }
+
+    public void setItemSelected(int id, boolean selected) {
+        if (selected) {
+            m_selection.add(id);
+        } else {
+            m_selection.remove(id);
+        }
+    }
+
+    public void toggleItemSelected(int id) {
+        if (m_selection.contains(id)) {
+            m_selection.remove(id);
+        } else {
+            m_selection.add(id);
+        }
+    }
+
+    public HashSet<Integer> getItemsSelected() {
+        return (HashSet<Integer>) m_selection.clone();
+    }
+
+    public int getItemSelectedCount() { return m_selection.size(); }
 
     public Cursor getCursor() {
         return m_cursor;
