@@ -68,6 +68,10 @@ public abstract class AbstractCursorAdapter<K extends RecyclerView.ViewHolder>
         }
     }
 
+    public void clearItemsSelected() {
+        m_selection.clear();
+    }
+
     public HashSet<Integer> getItemsSelected() {
         return (HashSet<Integer>) m_selection.clone();
     }
