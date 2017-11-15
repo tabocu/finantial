@@ -8,9 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -22,6 +27,7 @@ import sistemas.puc.com.finantialapp.util.DividerItemDecoration;
 
 public class MoedaFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor>,
+        ActionMode.Callback,
         RecyclerItemClickAdapter.OnItemClickListener {
 
     public static final String MOEDA_BASE = "BRL";
@@ -42,6 +48,7 @@ public class MoedaFragment extends Fragment implements
     private Cursor m_cursor = null;
 
     private boolean m_selectionMode = false;
+    private ActionMode m_actionMode;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -128,6 +135,46 @@ public class MoedaFragment extends Fragment implements
         m_adapter.toggleItemSelected(id);
         m_selectionMode = m_adapter.getItemSelectedCount() != 0;
         m_adapter.notifyItemChanged(position);
-        // TODO: Add toolbar selection logic
+
+        if (m_selectionMode) {
+            if (m_actionMode == null)
+                m_actionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(this);
+            m_actionMode.setTitle(String.valueOf(m_adapter.getItemSelectedCount()));
+        } else if (m_actionMode != null) {
+            m_actionMode.finish();
+        }
+    }
+
+    @Override
+    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        MenuInflater inflater = mode.getMenuInflater();
+        inflater.inflate(R.menu.moeda_context_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.pin_as_favorite:
+                handlePinned();
+                mode.finish();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public void onDestroyActionMode(ActionMode mode) {
+        m_adapter.clearItemsSelected();
+        m_adapter.notifyDataSetChanged();
+        m_actionMode = null;
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) { return false; }
+
+    private void handlePinned() {
+        // TODO: Implement pin action
     }
 }
