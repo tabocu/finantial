@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_moeda"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_height"
     android:paddingEnd="@dimen/list_item_padding"
     android:paddingStart="@dimen/list_item_padding"
-    android:background="?selectableItemBackground"
+    android:background="@drawable/selector"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     android:clickable="true">
 
     <TextView
@@ -18,6 +22,31 @@
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         tools:text="EUR" />
+
+    <RelativeLayout
+        android:id="@+id/selection_pin"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/item_moeda_code_textview"
+        android:layout_toStartOf="@+id/item_moeda_name_textview">
+
+        <ImageView
+            android:id="@+id/background_selection_pin"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:srcCompat="@drawable/circle_white" />
+
+        <ImageView
+            android:id="@+id/foreground_selection_pin"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/ic_circle_with_check_symbol" />
+
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/item_moeda_name_textview"
