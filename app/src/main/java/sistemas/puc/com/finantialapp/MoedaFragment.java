@@ -41,6 +41,8 @@ public class MoedaFragment extends Fragment implements
 
     private Cursor m_cursor = null;
 
+    private boolean m_selectionMode = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -99,7 +101,9 @@ public class MoedaFragment extends Fragment implements
 
     @Override
     public void onItemClick(View view, int position) {
-        if (m_cursor != null) {
+        if (m_selectionMode) {
+            toggleSelection(position);
+        } else {
             Intent intent = new Intent(getContext(), ConversaoActivity.class);
             intent.putExtra(ConversaoActivity.EXTRA_RIGHT_MOEDA, MOEDA_BASE);
 
@@ -114,6 +118,16 @@ public class MoedaFragment extends Fragment implements
 
     @Override
     public void onLongItemClick(View view, int position) {
+        toggleSelection(position);
+    }
 
+    private void toggleSelection(int position) {
+        Cursor cursor = m_adapter.getItemCursor(position);
+        int columnMoedaId   = cursor.getColumnIndexOrThrow(MoedaEntry._ID);
+        int id = cursor.getInt(columnMoedaId);
+        m_adapter.toggleItemSelected(id);
+        m_selectionMode = m_adapter.getItemSelectedCount() != 0;
+        m_adapter.notifyItemChanged(position);
+        // TODO: Add toolbar selection logic
     }
 }
