@@ -10,7 +10,7 @@ import sistemas.puc.com.finantialapp.data.FinantialContract.TesouroEntry;
 
 public class FinantialDbHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     static final String DATABASE_NAME = "finantial.db";
 
@@ -41,7 +41,7 @@ public class FinantialDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_TESOURO_TABLE = "CREATE TABLE " + TesouroEntry.TABLE_NAME + " (" +
                 TesouroEntry._ID                             + " INTEGER PRIMARY KEY," +
                 TesouroEntry.COLUMN_TESOURO_NAME             + " TEXT UNIQUE NOT NULL, " +
-                TesouroEntry.COLUMN_TESOURO_MODE             + " TEXT UNIQUE NOT NULL, " +
+                TesouroEntry.COLUMN_TESOURO_MODE             + " TEXT NOT NULL, " +
                 TesouroEntry.COLUMN_TESOURO_YEAR             + " INTEGER NOT NULL, " +
                 TesouroEntry.COLUMN_TESOURO_EXPIRATION_DATE  + " INTEGER NOT NULL, " +
                 TesouroEntry.COLUMN_TESOURO_BUYING_INCOME    + " REAL, " +
