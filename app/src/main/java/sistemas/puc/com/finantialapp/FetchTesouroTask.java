@@ -27,6 +27,10 @@ public class FetchTesouroTask extends AsyncTask<Void, Void, List<ContentValues>>
 
     private static final String TESOURO_URL = "http://www.tesouro.gov.br/tesouro-direto-precos-e-taxas-dos-titulos";
 
+    private static final Pattern vendaPatern = Pattern.compile("<tr class=\"camposTesouroDireto\">(.+?)</tr>");
+    private static final Pattern compraPatern = Pattern.compile("<tr class=\"camposTesouroDireto \">(.+?)</tr>");
+    private static final Pattern contentPatern = Pattern.compile("<td[^>]*>(.+?)</td>");
+
     private final String LOG_TAG = FetchTesouroTask.class.getSimpleName();
     private Context m_context;
 
@@ -57,7 +61,7 @@ public class FetchTesouroTask extends AsyncTask<Void, Void, List<ContentValues>>
 
     @Override
     protected void onPostExecute(List<ContentValues> result) {
-        if (result.size() > 0) {
+        if (result != null && result.size() > 0) {
             m_context.getContentResolver().delete
                     (FinantialContract.TesouroEntry.CONTENT_URI, null, null);
             ContentValues[] cvArray = result.toArray(new ContentValues[result.size()]);
@@ -69,10 +73,6 @@ public class FetchTesouroTask extends AsyncTask<Void, Void, List<ContentValues>>
     private List<ContentValues> getTesouroFromString(String tesouroString) throws Exception {
         // Begin
         HashMap<String, LinkedList<String>> tesouroHash = new HashMap<>();
-
-        Pattern vendaPatern = Pattern.compile("<tr class=\"camposTesouroDireto\">(.+?)</tr>");
-        Pattern compraPatern = Pattern.compile("<tr class=\"camposTesouroDireto \">(.+?)</tr>");
-        Pattern contentPatern = Pattern.compile("<td[^>]*>(.+?)</td>");
 
         Matcher lineMatcher;
         Matcher fieldMatcher;
