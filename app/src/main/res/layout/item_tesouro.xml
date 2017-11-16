@@ -40,12 +40,12 @@
         <TextView
             android:textAlignment="center"
             android:textSize="16sp"
-            tools:text="Compra" />
+            android:text="Compra" />
 
         <TextView
             android:textAlignment="center"
             android:textSize="16sp"
-            tools:text="Venda" />
+            android:text="Venda" />
     </TableRow>
 
     <TableRow
@@ -57,7 +57,7 @@
             android:layout_span="3"
             android:textAlignment="viewStart"
             android:textSize="16sp"
-            tools:text="Rendimento" />
+            android:text="Rendimento" />
 
         <TextView
             android:id="@+id/item_tesouro_buying_income_textview"
@@ -83,7 +83,7 @@
             android:layout_span="3"
             android:textAlignment="viewStart"
             android:textSize="16sp"
-            tools:text="Valor mínimo" />
+            android:text="Valor mínimo" />
 
         <TextView
             android:id="@+id/item_tesouro_min_buying_textview"
@@ -107,7 +107,7 @@
             android:layout_span="3"
             android:textAlignment="viewStart"
             android:textSize="16sp"
-            tools:text="Preço unitário" />
+            android:text="Preço unitário" />
 
         <TextView
             android:id="@+id/item_tesouro_buying_price_textview"
@@ -134,7 +134,7 @@
             android:layout_span="5"
             android:textAlignment="center"
             android:textSize="16sp"
-            tools:text="Vencimento" />
+            android:text="Vencimento" />
     </TableRow>
 
     <TableRow
