@@ -35,6 +35,13 @@ public final class Util {
         return numberFormat.format(value);
     }
 
+    public static String getBRStringFromDouble(double value, int fractionDigits) {
+        NumberFormat numberFormat = NumberFormat.getInstance(new Locale("pt","BR"));
+        numberFormat.setMinimumFractionDigits(fractionDigits);
+        numberFormat.setMaximumFractionDigits(fractionDigits);
+        return numberFormat.format(value);
+    }
+
     public static String getPercentStringFromDouble(@FloatRange(from=0) double value,
                                                  @IntRange(from=0) int fractionDigits) {
         NumberFormat numberFormat = NumberFormat.getPercentInstance();
@@ -65,6 +72,11 @@ public final class Util {
         Date date = new Date(value);
         SimpleDateFormat formater = new SimpleDateFormat("yyyy",new Locale("pt", "BR"));
         return formater.format(date);
+    }
+
+    public static int getYearIntFromLong(@IntRange(from=0) long value) throws NumberFormatException{
+        String year = getYearStringFromLong(value);
+        return Integer.parseInt(year);
     }
 
     public static long getTimeFromDate(@IntRange(from=1, to=31) int day,
