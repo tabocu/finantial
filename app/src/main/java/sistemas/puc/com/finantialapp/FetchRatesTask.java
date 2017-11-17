@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,8 +19,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import sistemas.puc.com.finantialapp.data.FinantialContract;
-import sistemas.puc.com.finantialapp.entities.MoedaItem;
+import sistemas.puc.com.finantialapp.data.FinantialContract.MoedaEntry;
 import sistemas.puc.com.finantialapp.model.MoedaMap;
 import sistemas.puc.com.finantialapp.util.Util;
 
@@ -110,10 +108,29 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<ContentValues>>
 
     @Override
     protected void onPostExecute(List<ContentValues> result) {
-        if (result.size() > 0) {
-            m_context.getContentResolver().delete(FinantialContract.MoedaEntry.CONTENT_URI, null, null);
-            ContentValues[] cvArray = result.toArray(new ContentValues[result.size()]);
-            m_context.getContentResolver().bulkInsert(FinantialContract.MoedaEntry.CONTENT_URI, cvArray);
+        if (result != null) {
+            // iterate over all contentValues
+            for (ContentValues contentValues : result) {
+                // get moeda code and try to update an existent moeda
+                String code = (String) contentValues.get(MoedaEntry.COLUMN_MOEDA_CODE);
+                int updatedRows = m_context.getContentResolver().update(
+                        MoedaEntry.CONTENT_URI,
+                        contentValues,
+                        MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_CODE + " = ?",
+                        new String[] {code});
+
+                // check if one or none moeda were updated
+                assert (updatedRows == 0 || updatedRows == 1);
+
+                // if no moeda were updated, insert a new moeda
+                if (updatedRows == 0) {
+                    // mark the new moeda as not favorite
+                    contentValues.put(MoedaEntry.COLUMN_MOEDA_FAVORITE, 0);
+                    m_context.getContentResolver().insert(
+                            MoedaEntry.CONTENT_URI,
+                            contentValues);
+                }
+            }
         }
     }
 
@@ -137,20 +154,20 @@ public class FetchRatesTask extends AsyncTask<String, Void, List<ContentValues>>
             double rate = 1.0/ratesJson.getDouble(code);
 
             ContentValues moedaValues = new ContentValues();
-            moedaValues.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_CODE, code);
-            moedaValues.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_NAME, name);
-            moedaValues.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_RATE, rate);
-            moedaValues.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_DATE, time);
+            moedaValues.put(MoedaEntry.COLUMN_MOEDA_CODE, code);
+            moedaValues.put(MoedaEntry.COLUMN_MOEDA_NAME, name);
+            moedaValues.put(MoedaEntry.COLUMN_MOEDA_RATE, rate);
+            moedaValues.put(MoedaEntry.COLUMN_MOEDA_DATE, time);
 
             result.add(moedaValues);
         }
 
         ContentValues baseMoedaValue = new ContentValues();
         String baseMoedaName = MoedaMap.getCurrencyName(MoedaFragment.MOEDA_BASE);
-        baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_CODE, MoedaFragment.MOEDA_BASE);
-        baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_NAME, baseMoedaName);
-        baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_RATE, 1);
-        baseMoedaValue.put(FinantialContract.MoedaEntry.COLUMN_MOEDA_DATE, time);
+        baseMoedaValue.put(MoedaEntry.COLUMN_MOEDA_CODE, MoedaFragment.MOEDA_BASE);
+        baseMoedaValue.put(MoedaEntry.COLUMN_MOEDA_NAME, baseMoedaName);
+        baseMoedaValue.put(MoedaEntry.COLUMN_MOEDA_RATE, 1);
+        baseMoedaValue.put(MoedaEntry.COLUMN_MOEDA_DATE, time);
         result.add(baseMoedaValue);
 
         return result;
