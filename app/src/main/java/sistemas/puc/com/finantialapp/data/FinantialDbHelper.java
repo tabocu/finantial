@@ -10,7 +10,7 @@ import sistemas.puc.com.finantialapp.data.FinantialContract.TesouroEntry;
 
 public class FinantialDbHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     static final String DATABASE_NAME = "finantial.db";
 
@@ -21,11 +21,12 @@ public class FinantialDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_MOEDA_TABLE = "CREATE TABLE " + MoedaEntry.TABLE_NAME + " (" +
-                MoedaEntry._ID               + " INTEGER PRIMARY KEY," +
-                MoedaEntry.COLUMN_MOEDA_CODE + " TEXT UNIQUE NOT NULL, " +
-                MoedaEntry.COLUMN_MOEDA_NAME + " TEXT UNIQUE NOT NULL, " +
-                MoedaEntry.COLUMN_MOEDA_DATE + " INTEGER NOT NULL, " +
-                MoedaEntry.COLUMN_MOEDA_RATE + " REAL NOT NULL " +
+                MoedaEntry._ID                   + " INTEGER PRIMARY KEY," +
+                MoedaEntry.COLUMN_MOEDA_CODE     + " TEXT UNIQUE NOT NULL, " +
+                MoedaEntry.COLUMN_MOEDA_NAME     + " TEXT UNIQUE NOT NULL, " +
+                MoedaEntry.COLUMN_MOEDA_DATE     + " INTEGER NOT NULL, " +
+                MoedaEntry.COLUMN_MOEDA_RATE     + " REAL NOT NULL, " +
+                MoedaEntry.COLUMN_MOEDA_FAVORITE + " INTEGER NOT NULL " +
                 " );";
 
         final String SQL_CREATE_INDICE_TABLE = "CREATE TABLE " + IndiceEntry.TABLE_NAME + " (" +
