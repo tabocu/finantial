@@ -1,5 +1,7 @@
 package sistemas.puc.com.finantialapp;
 
+import android.content.ContentProvider;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -12,12 +14,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.HashSet;
 
 import sistemas.puc.com.finantialapp.adapters.MoedaCursorAdapter;
 import sistemas.puc.com.finantialapp.adapters.RecyclerItemClickAdapter;
@@ -39,6 +44,7 @@ public class MoedaFragment extends Fragment implements
             MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_CODE,
             MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_NAME,
             MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_RATE,
+            MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_FAVORITE,
     };
 
     private RecyclerView m_recyclerView;
@@ -91,7 +97,8 @@ public class MoedaFragment extends Fragment implements
                 MOEDA_COLUMNS,
                 MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_CODE + " <> ?",
                 new String[] { MOEDA_BASE },
-                null);
+                MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_FAVORITE + " DESC, " +
+                        MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_NAME + " ASC ");
     }
 
     @Override
@@ -175,6 +182,40 @@ public class MoedaFragment extends Fragment implements
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) { return false; }
 
     private void handlePinned() {
-        // TODO: Implement pin action
+        // Get all selected items
+        HashSet<Integer> itemsSelected = m_adapter.getItemsSelected();
+
+        if (itemsSelected.size() <= 0)
+            return;
+
+        // Format selected items to perform a query
+        String selectionGroup = itemsSelected
+                .toString()
+                .replace("[", "(\'")
+                .replace("]", "\')")
+                .replace(", ", "\', \'");
+
+        // Get all selected items that are marked as favorite
+        Cursor cursor = getContext().getContentResolver().query(
+                MOEDA_URI,
+                null,
+                MoedaEntry.TABLE_NAME + "." + MoedaEntry._ID + " IN " + selectionGroup +
+                " AND " + MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_FAVORITE + " = 1",
+                null,
+                null);
+
+        assert (cursor != null);
+
+        // Create a content value with favorite attribute
+        ContentValues contentValues = new ContentValues();
+        // If there is any item marked as favorite on the previously query, mark all as non favorite
+        contentValues.put(MoedaEntry.COLUMN_MOEDA_FAVORITE, cursor.getCount() > 0 ? 0 : 1);
+
+        // Update all selected items with the favorite mark
+        getContext().getContentResolver().update(
+                MOEDA_URI,
+                contentValues,
+                MoedaEntry.TABLE_NAME + "." + MoedaEntry._ID + " IN " + selectionGroup,
+                null);
     }
 }
