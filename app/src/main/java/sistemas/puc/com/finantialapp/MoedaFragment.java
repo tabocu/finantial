@@ -175,6 +175,7 @@ public class MoedaFragment extends Fragment implements
     public void onDestroyActionMode(ActionMode mode) {
         m_adapter.clearItemsSelected();
         m_adapter.notifyDataSetChanged();
+        m_selectionMode = false;
         m_actionMode = null;
     }
 
