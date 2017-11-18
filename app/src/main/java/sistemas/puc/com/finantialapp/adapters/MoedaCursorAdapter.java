@@ -47,16 +47,17 @@ public class MoedaCursorAdapter extends AbstractCursorAdapter<MoedaCursorAdapter
 
     @Override
     public void onBindViewHolder(ViewHolder holder, Cursor cursor) {
-        int columnMoedaId   = cursor.getColumnIndexOrThrow(MoedaEntry._ID);
-        int columnMoedaCode = cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_CODE);
-        int columnMoedaName = cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_NAME);
-        int columnMoedaRate = cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_RATE);
+        int columnMoedaId       = cursor.getColumnIndexOrThrow(MoedaEntry._ID);
+        int columnMoedaCode     = cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_CODE);
+        int columnMoedaName     = cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_NAME);
+        int columnMoedaRate     = cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_RATE);
+        int columnMoedaFavorite = cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_FAVORITE);
 
         holder.selectionPin.setVisibility(isItemSelected(cursor.getInt(columnMoedaId)) ? View.VISIBLE : View.INVISIBLE);
         holder.view.setSelected(isItemSelected(cursor.getInt(columnMoedaId)));
 
         holder.codigoMoeda.setText(cursor.getString(columnMoedaCode));
-        holder.nomeMoeda.setText(cursor.getString(columnMoedaName));
+        holder.nomeMoeda.setText(cursor.getInt(columnMoedaFavorite) + " - " + cursor.getString(columnMoedaName));
 
         double cotacao = cursor.getDouble(columnMoedaRate);
         holder.cotacaoMoeda.setText(Util.getRealStringFromDouble(cotacao,4));
