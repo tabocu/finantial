@@ -4,5 +4,6 @@
     <item
         android:id="@+id/pin_as_favorite"
         android:title="Pin"
+        android:icon="@drawable/ic_pinned_icon2"
         app:showAsAction="always"/>
 </menu>

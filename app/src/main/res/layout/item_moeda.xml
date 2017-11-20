@@ -12,38 +12,49 @@
     android:focusable="true"
     android:clickable="true">
 
-    <TextView
-        android:id="@+id/item_moeda_code_textview"
-        android:layout_width="@dimen/icon_list_size"
-        android:layout_height="@dimen/icon_list_size"
-        android:layout_centerVertical="true"
-        android:background="@drawable/circle"
-        android:gravity="center"
-        android:textColor="@android:color/background_light"
-        android:textStyle="bold"
-        tools:text="EUR" />
-
     <RelativeLayout
-        android:id="@+id/selection_pin"
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/item_moeda_code_textview"
-        android:layout_toStartOf="@+id/item_moeda_name_textview">
+        android:id="@+id/relativeLayout"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true">
 
         <ImageView
-            android:id="@+id/background_selection_pin"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            app:srcCompat="@drawable/circle_white" />
+            android:layout_width="@dimen/icon_list_size"
+            android:layout_height="@dimen/icon_list_size"
+            android:layout_alignStart="@+id/item_moeda_code_textview"
+            android:layout_alignTop="@+id/item_moeda_code_textview"
+            android:src="@drawable/circle" />
 
-        <ImageView
-            android:id="@+id/foreground_selection_pin"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_centerVertical="true"
+        <TextView
+            android:id="@+id/item_moeda_code_textview"
+            android:layout_width="@dimen/icon_list_size"
+            android:layout_height="@dimen/icon_list_size"
             android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/ic_circle_with_check_symbol" />
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            tools:text="EUR" />
+
+
+        <ImageView
+            android:id="@+id/selected_pin"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_confirm_icon" />
+
+        <ImageView
+            android:id="@+id/pinned_pin"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_pinned_icon" />
 
     </RelativeLayout>
 
@@ -53,7 +64,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/list_item_padding"
-        android:layout_toEndOf="@+id/item_moeda_code_textview"
+
+        android:layout_toEndOf="@+id/relativeLayout"
         android:layout_toStartOf="@+id/item_moeda_value_textview"
         android:gravity="center_vertical"
         android:textAppearance="@android:style/TextAppearance.Material.Body2"
