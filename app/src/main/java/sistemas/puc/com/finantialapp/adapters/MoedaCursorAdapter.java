@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import sistemas.puc.com.finantialapp.R;
@@ -23,7 +22,8 @@ public class MoedaCursorAdapter extends AbstractCursorAdapter<MoedaCursorAdapter
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public View view;
-        public View selectionPin;
+        public View selectedPin;
+        public View pinnedPin;
         public TextView codigoMoeda;
         public TextView nomeMoeda;
         public TextView cotacaoMoeda;
@@ -31,7 +31,8 @@ public class MoedaCursorAdapter extends AbstractCursorAdapter<MoedaCursorAdapter
         public ViewHolder(View itemView) {
             super(itemView);
             view = itemView.findViewById(R.id.item_moeda);
-            selectionPin = itemView.findViewById(R.id.selection_pin);
+            selectedPin = itemView.findViewById(R.id.selected_pin);
+            pinnedPin = itemView.findViewById(R.id.pinned_pin);
             codigoMoeda = (TextView) itemView.findViewById(R.id.item_moeda_code_textview);
             nomeMoeda = (TextView) itemView.findViewById(R.id.item_moeda_name_textview);
             cotacaoMoeda = (TextView) itemView.findViewById(R.id.item_moeda_value_textview);
@@ -53,11 +54,12 @@ public class MoedaCursorAdapter extends AbstractCursorAdapter<MoedaCursorAdapter
         int columnMoedaRate     = cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_RATE);
         int columnMoedaFavorite = cursor.getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_FAVORITE);
 
-        holder.selectionPin.setVisibility(isItemSelected(cursor.getInt(columnMoedaId)) ? View.VISIBLE : View.INVISIBLE);
+        holder.selectedPin.setVisibility(isItemSelected(cursor.getInt(columnMoedaId)) ? View.VISIBLE : View.INVISIBLE);
+        holder.pinnedPin.setVisibility(cursor.getInt(columnMoedaFavorite) == 1 ? View.VISIBLE : View.INVISIBLE);
         holder.view.setSelected(isItemSelected(cursor.getInt(columnMoedaId)));
 
         holder.codigoMoeda.setText(cursor.getString(columnMoedaCode));
-        holder.nomeMoeda.setText(cursor.getInt(columnMoedaFavorite) + " - " + cursor.getString(columnMoedaName));
+        holder.nomeMoeda.setText(cursor.getString(columnMoedaName));
 
         double cotacao = cursor.getDouble(columnMoedaRate);
         holder.cotacaoMoeda.setText(Util.getRealStringFromDouble(cotacao,4));
