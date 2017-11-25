@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import sistemas.puc.com.finantialapp.Moeda.MoedaFragment;
+import sistemas.puc.com.finantialapp.moeda.MoedaFragment;
 import sistemas.puc.com.finantialapp.model.Database;
 
 public class MainActivity extends AppCompatActivity
