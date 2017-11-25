@@ -1,4 +1,4 @@
-package sistemas.puc.com.finantialapp.Moeda;
+package sistemas.puc.com.finantialapp.moeda;
 
 import android.content.Context;
 import android.database.Cursor;

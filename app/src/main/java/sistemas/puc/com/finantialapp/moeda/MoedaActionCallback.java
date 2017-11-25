@@ -1,4 +1,4 @@
-package sistemas.puc.com.finantialapp.Moeda;
+package sistemas.puc.com.finantialapp.moeda;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -51,6 +51,10 @@ public class MoedaActionCallback implements
         mActionMode = null;
     }
 
+    public boolean isOnSelectionMode() {
+        return mActionMode != null;
+    }
+
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         MenuInflater inflater = mode.getMenuInflater();
@@ -82,19 +86,10 @@ public class MoedaActionCallback implements
 
     @Override
     public void onItemClick(View view, int position) {
-        if (mActionMode == null) {
-            Intent intent = new Intent(mContext, ConversaoActivity.class);
-            intent.putExtra(ConversaoActivity.EXTRA_RIGHT_MOEDA, mMoedaBase);
-
-            mAdapter.getCursor().moveToPosition(position);
-            int codeColumnIndex = mAdapter.getCursor().getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_CODE);
-            String code = mAdapter.getCursor().getString(codeColumnIndex);
-
-            intent.putExtra(ConversaoActivity.EXTRA_LEFT_MOEDA, code);
-            mContext.startActivity(intent);
-        } else {
+        if (mActionMode == null)
+            openConversao(position);
+        else
             toggleSelection(position);
-        }
     }
 
     @Override
@@ -118,6 +113,18 @@ public class MoedaActionCallback implements
             mActionMode.finish();
     }
 
+    private void openConversao(int position) {
+        Intent intent = new Intent(mContext, ConversaoActivity.class);
+        intent.putExtra(ConversaoActivity.EXTRA_RIGHT_MOEDA, mMoedaBase);
+
+        mAdapter.getCursor().moveToPosition(position);
+        int codeColumnIndex = mAdapter.getCursor().getColumnIndexOrThrow(MoedaEntry.COLUMN_MOEDA_CODE);
+        String code = mAdapter.getCursor().getString(codeColumnIndex);
+
+        intent.putExtra(ConversaoActivity.EXTRA_LEFT_MOEDA, code);
+        mContext.startActivity(intent);
+    }
+
     private void handlePinned() {
         // Get all selected items
         HashSet<Integer> itemsSelected = mAdapter.getItemsSelected();
@@ -125,6 +132,7 @@ public class MoedaActionCallback implements
         if (itemsSelected.size() == 0)
             return;
 
+        // TODO: Extract that to utils function "toSqlString(Set<Integer> intSet)"
         // Format selected items to perform a query
         String selectionGroup = itemsSelected
                 .toString()
