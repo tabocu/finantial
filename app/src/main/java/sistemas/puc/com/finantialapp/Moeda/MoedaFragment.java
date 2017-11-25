@@ -1,20 +1,15 @@
 package sistemas.puc.com.finantialapp;
 
-import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +19,7 @@ import android.view.ViewGroup;
 
 import java.util.HashSet;
 
+import sistemas.puc.com.finantialapp.Moeda.LoaderCallback;
 import sistemas.puc.com.finantialapp.adapters.MoedaCursorAdapter;
 import sistemas.puc.com.finantialapp.adapters.RecyclerItemClickAdapter;
 import sistemas.puc.com.finantialapp.data.FinantialContract.MoedaEntry;
@@ -31,7 +27,6 @@ import sistemas.puc.com.finantialapp.model.Database;
 import sistemas.puc.com.finantialapp.util.DividerItemDecoration;
 
 public class MoedaFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<Cursor>,
         ActionMode.Callback,
         RecyclerItemClickAdapter.OnItemClickListener {
 
@@ -55,6 +50,8 @@ public class MoedaFragment extends Fragment implements
 
     private boolean m_selectionMode = false;
     private ActionMode m_actionMode;
+
+    LoaderCallback mLoaderCallBack;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,33 +81,10 @@ public class MoedaFragment extends Fragment implements
 
         m_recyclerView.setAdapter(m_adapter);
 
-        getLoaderManager().initLoader(0, null, this);
+        mLoaderCallBack = new LoaderCallback(getActivity(), m_adapter, MOEDA_BASE);
+        getLoaderManager().initLoader(0, null, mLoaderCallBack);
 
         return rootView;
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(
-                getActivity(),
-                MOEDA_URI,
-                MOEDA_COLUMNS,
-                MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_CODE + " <> ?",
-                new String[] { MOEDA_BASE },
-                MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_FAVORITE + " DESC, " +
-                        MoedaEntry.TABLE_NAME + "." + MoedaEntry.COLUMN_MOEDA_NAME + " ASC ");
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        m_adapter.swapCursor(data);
-        m_cursor = data;
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        m_adapter.swapCursor(null);
-        m_cursor = null;
     }
 
     @Override
