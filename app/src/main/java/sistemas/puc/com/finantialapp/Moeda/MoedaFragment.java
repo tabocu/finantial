@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import sistemas.puc.com.finantialapp.R;
-import sistemas.puc.com.finantialapp.adapters.MoedaCursorAdapter;
 import sistemas.puc.com.finantialapp.adapters.RecyclerItemClickAdapter;
 import sistemas.puc.com.finantialapp.model.Database;
 import sistemas.puc.com.finantialapp.util.DividerItemDecoration;
