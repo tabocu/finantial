@@ -1,4 +1,4 @@
-package sistemas.puc.com.finantialapp.adapters;
+package sistemas.puc.com.finantialapp.Moeda;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import sistemas.puc.com.finantialapp.R;
+import sistemas.puc.com.finantialapp.adapters.AbstractCursorAdapter;
 import sistemas.puc.com.finantialapp.data.FinantialContract.MoedaEntry;
 import sistemas.puc.com.finantialapp.util.Util;
 
