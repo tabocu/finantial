@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import sistemas.puc.com.finantialapp.Moeda.MoedaFragment;
 import sistemas.puc.com.finantialapp.data.FinantialContract.MoedaEntry;
 import sistemas.puc.com.finantialapp.model.MoedaMap;
 import sistemas.puc.com.finantialapp.util.Util;

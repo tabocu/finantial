@@ -10,7 +10,7 @@ import java.util.List;
 import sistemas.puc.com.finantialapp.FetchIndicesTask;
 import sistemas.puc.com.finantialapp.FetchRatesTask;
 import sistemas.puc.com.finantialapp.FetchTesouroTask;
-import sistemas.puc.com.finantialapp.MoedaFragment;
+import sistemas.puc.com.finantialapp.Moeda.MoedaFragment;
 import sistemas.puc.com.finantialapp.entities.IndiceItem;
 import sistemas.puc.com.finantialapp.entities.MoedaItem;
 import sistemas.puc.com.finantialapp.entities.TesouroItem;
