@@ -16,8 +16,8 @@ import sistemas.puc.com.finantialapp.util.Util;
 
 public class MoedaCursorAdapter extends AbstractCursorAdapter<MoedaCursorAdapter.ViewHolder> {
 
-    public MoedaCursorAdapter(@NonNull Context context, @NonNull Cursor cursor) {
-        super(context, cursor);
+    public MoedaCursorAdapter(@NonNull Context context) {
+        super(context, null);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
