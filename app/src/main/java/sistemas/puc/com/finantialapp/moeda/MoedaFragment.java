@@ -2,6 +2,7 @@ package sistemas.puc.com.finantialapp.moeda;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,7 +32,7 @@ public class MoedaFragment extends Fragment {
         // Update database on startup
         Database.update(getContext());
 
-        m_adapter = new MoedaCursorAdapter(getContext(), null);
+        m_adapter = new MoedaCursorAdapter(getContext());
         m_layoutManager = new LinearLayoutManager(getContext());
 
         m_recyclerView = (RecyclerView) rootView.findViewById(R.id.listview_moeda);
@@ -46,6 +47,7 @@ public class MoedaFragment extends Fragment {
         return rootView;
     }
 
+    @NonNull
     private DividerItemDecoration getItemDecoration() {
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
         itemDecoration.setLastItemIncluded(false);
@@ -55,6 +57,7 @@ public class MoedaFragment extends Fragment {
         return itemDecoration;
     }
 
+    @NonNull
     private RecyclerItemClickAdapter getTouchListener() {
         return new RecyclerItemClickAdapter(
                 getContext(),
@@ -65,6 +68,7 @@ public class MoedaFragment extends Fragment {
                         MOEDA_BASE));
     }
 
+    @NonNull
     private LoaderManager.LoaderCallbacks<Cursor> getLoaderCallback() {
         return new MoedaLoaderCallback(
                 getActivity(),
