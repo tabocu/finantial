@@ -1,4 +1,4 @@
-package sistemas.puc.com.finantialapp;
+package sistemas.puc.com.finantialapp.tesouro;
 
 import android.database.Cursor;
 import android.net.Uri;
@@ -13,9 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import sistemas.puc.com.finantialapp.R;
 import sistemas.puc.com.finantialapp.adapters.AbstractCursorAdapter;
-import sistemas.puc.com.finantialapp.adapters.IndiceCursorAdapter;
-import sistemas.puc.com.finantialapp.adapters.TesouroCursorAdapter;
 import sistemas.puc.com.finantialapp.model.Database;
 import sistemas.puc.com.finantialapp.util.DividerItemDecoration;
 import sistemas.puc.com.finantialapp.data.FinantialContract.TesouroEntry;

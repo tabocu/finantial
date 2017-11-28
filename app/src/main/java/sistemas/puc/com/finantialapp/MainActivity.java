@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import sistemas.puc.com.finantialapp.moeda.MoedaFragment;
 import sistemas.puc.com.finantialapp.model.Database;
+import sistemas.puc.com.finantialapp.tesouro.TesouroFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
