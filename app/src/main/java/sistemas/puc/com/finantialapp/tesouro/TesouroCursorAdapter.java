@@ -16,8 +16,8 @@ import sistemas.puc.com.finantialapp.util.Util;
 
 public class TesouroCursorAdapter extends AbstractCursorAdapter<TesouroCursorAdapter.ViewHolder> {
 
-    public TesouroCursorAdapter(@NonNull Context context, @NonNull Cursor cursor) {
-        super(context, cursor);
+    public TesouroCursorAdapter(@NonNull Context context) {
+        super(context, null);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
