@@ -61,7 +61,7 @@ public class TesouroFragment extends Fragment implements LoaderManager.LoaderCal
         m_layoutManager = new LinearLayoutManager(getContext());
         m_recyclerView.setLayoutManager(m_layoutManager);
 
-        m_adapter = new TesouroCursorAdapter(getContext(), null);
+        m_adapter = new TesouroCursorAdapter(getContext());
 
         m_recyclerView.setAdapter(m_adapter);
 
