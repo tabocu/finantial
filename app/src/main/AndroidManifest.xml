@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ConversaoActivity"
+            android:name=".conversao.ConversaoActivity"
             android:label="@string/conversao_name"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
