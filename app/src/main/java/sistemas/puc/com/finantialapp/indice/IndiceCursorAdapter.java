@@ -1,16 +1,16 @@
-package sistemas.puc.com.finantialapp.adapters;
+package sistemas.puc.com.finantialapp.indice;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import sistemas.puc.com.finantialapp.R;
+import sistemas.puc.com.finantialapp.adapters.AbstractCursorAdapter;
 import sistemas.puc.com.finantialapp.model.IndiceEnum;
 import sistemas.puc.com.finantialapp.util.Util;
 
