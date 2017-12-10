@@ -14,7 +14,7 @@ import android.view.View;
 
 import java.util.HashSet;
 
-import sistemas.puc.com.finantialapp.ConversaoActivity;
+import sistemas.puc.com.finantialapp.conversao.ConversaoActivity;
 import sistemas.puc.com.finantialapp.R;
 import sistemas.puc.com.finantialapp.adapters.AbstractCursorAdapter;
 import sistemas.puc.com.finantialapp.adapters.RecyclerItemClickAdapter;

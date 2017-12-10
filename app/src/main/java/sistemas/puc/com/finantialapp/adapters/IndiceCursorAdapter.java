@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import sistemas.puc.com.finantialapp.R;
-import sistemas.puc.com.finantialapp.data.FinantialContract.MoedaEntry;
-import sistemas.puc.com.finantialapp.entities.IndiceItem;
 import sistemas.puc.com.finantialapp.model.IndiceEnum;
 import sistemas.puc.com.finantialapp.util.Util;
 
