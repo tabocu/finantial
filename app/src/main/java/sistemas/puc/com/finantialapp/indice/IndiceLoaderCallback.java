@@ -25,6 +25,9 @@ public class IndiceLoaderCallback implements LoaderManager.LoaderCallbacks<Curso
             IndiceEntry.TABLE_NAME + "." + IndiceEntry.COLUMN_INDICE_TYPE,
     };
 
+    static final String SORT_ORDER =
+            IndiceEntry.TABLE_NAME + "." + IndiceEntry.COLUMN_INDICE_CODE + " ASC ";
+
     Context mContext;
     AbstractCursorAdapter mAdapter;
 
@@ -42,7 +45,7 @@ public class IndiceLoaderCallback implements LoaderManager.LoaderCallbacks<Curso
                 COLUMNS,
                 null,
                 null,
-                null);
+                SORT_ORDER);
     }
 
     @Override
