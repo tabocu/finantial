@@ -1,33 +1,32 @@
-package sistemas.puc.com.finantialapp.adapters;
+package sistemas.puc.com.finantialapp.indice;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import sistemas.puc.com.finantialapp.R;
+import sistemas.puc.com.finantialapp.adapters.AbstractCursorAdapter;
 import sistemas.puc.com.finantialapp.model.IndiceEnum;
 import sistemas.puc.com.finantialapp.util.Util;
 
 public class IndiceCursorAdapter extends AbstractCursorAdapter<IndiceCursorAdapter.ViewHolder> {
 
-    private static final int VIEW_TYPE_COUNT = 2;
+    static final int VIEW_TYPE_COUNT = 2;
 
-    public static final int COLUMN_INDICE_ID = 0;
-    public static final int COLUMN_INDICE_CODE = 1;
-    public static final int COLUMN_INDICE_NAME = 2;
-    public static final int COLUMN_INDICE_DATE = 3;
-    public static final int COLUMN_INDICE_MONTH_RATE = 4;
-    public static final int COLUMN_INDICE_YEAR_RATE = 5;
-    public static final int COLUMN_INDICE_TYPE = 6;
+    static final int COLUMN_INDICE_CODE = 1;
+    static final int COLUMN_INDICE_NAME = 2;
+    static final int COLUMN_INDICE_DATE = 3;
+    static final int COLUMN_INDICE_MONTH_RATE = 4;
+    static final int COLUMN_INDICE_YEAR_RATE = 5;
+    static final int COLUMN_INDICE_TYPE = 6;
 
-    public IndiceCursorAdapter(@NonNull Context context, @NonNull Cursor cursor) {
-        super(context, cursor);
+    public IndiceCursorAdapter(@NonNull Context context) {
+        super(context, null);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

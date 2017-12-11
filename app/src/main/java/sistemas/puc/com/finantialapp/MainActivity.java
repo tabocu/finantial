@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import sistemas.puc.com.finantialapp.indice.IndiceFragment;
 import sistemas.puc.com.finantialapp.moeda.MoedaFragment;
 import sistemas.puc.com.finantialapp.model.Database;
 import sistemas.puc.com.finantialapp.tesouro.TesouroFragment;
